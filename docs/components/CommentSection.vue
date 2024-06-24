@@ -34,56 +34,50 @@
 </template>
 
 <script setup>
-import { ref, onMounted } from 'vue';
+import { ref, onMounted, watch } from 'vue';
 import { supabase } from '../.vitepress/supabase';
 import { useData } from 'vitepress';
 
-// Get page-specific data from VitePress
 const { page } = useData();
-const pageSlug = page.value.relativePath;
-
 const comments = ref([]);
-const newComment = ref({
-  name: '',
-  content: '',
-  page_slug: pageSlug,
-});
+const newComment = ref({ name: '', content: '', page_slug: page.value.relativePath });
 const isSubmitting = ref(false);
 
-async function fetchComments() {
+// Format date to local string
+const formatDate = (date) => new Date(date).toLocaleString();
+
+// Fetch comments for the current page
+const fetchComments = async () => {
   const { data, error } = await supabase
     .from('comments')
     .select('*')
-    .eq('page_slug', pageSlug)
+    .eq('page_slug', newComment.value.page_slug)
     .order('created_at', { ascending: false });
+  if (!error) comments.value = data;
+};
 
-  if (error) {
-    console.error('Error fetching comments:', error);
-  } else {
-    comments.value = data;
-  }
-}
-
-async function handleSubmit() {
+// Submit a new comment
+const handleSubmit = async () => {
   if (isSubmitting.value) return;
   isSubmitting.value = true;
-
-  const { error } = await supabase.from('comments').insert([{
-    name: newComment.value.name,
-    content: newComment.value.content,
-    page_slug: newComment.value.page_slug,
-  }]);
-
-  if (error) {
-    console.error('Error adding comment:', error);
-    alert(`Failed to post comment: ${error.message}`);
-  } else {
+  const { error } = await supabase.from('comments').insert([newComment.value]);
+  if (!error) {
     newComment.value.name = '';
     newComment.value.content = '';
     await fetchComments();
   }
   isSubmitting.value = false;
-}
+};
+
+// Watch for page path changes, refresh comments and page_slug on navigation
+watch(
+  () => page.value.relativePath,
+  async (newSlug) => {
+    newComment.value.page_slug = newSlug;
+    await fetchComments();
+  },
+  { immediate: true }
+);
 
 onMounted(fetchComments);
 </script>
