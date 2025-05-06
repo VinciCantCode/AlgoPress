@@ -4,7 +4,7 @@ import { defineConfig } from 'vitepress'
 export default defineConfig({
   title: "LeetCode",
   description: "Record my algorithm learning process",
-  base:'LeetCode',
+  base:'/LeetCode',
   themeConfig: {
     // https://vitepress.dev/reference/default-theme-config
     nav: [
