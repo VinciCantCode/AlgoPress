@@ -14,16 +14,22 @@ export default defineConfig({
 
     sidebar: [
       {
-        text: 'Examples',
+        text: 'Entry Level 20 Questions',
+        collapsed: false,
         items: [
-          { text: 'Markdown Examples', link: '/markdown-examples' },
-          { text: 'Runtime API Examples', link: '/api-examples' }
+          // { text: 'Markdown Examples', link: '/markdown-examples' },
+          // { text: 'Runtime API Examples', link: '/api-examples' },
+          { text: '2235. Add Two Integers', link: '/Entry Level 20 Questions/2235. Add Two Integers.md' },
+          { text: '2469. Convert the Temperature', link: '/Entry Level 20 Questions/2469. Convert the Temperature.md' },
+          { text: '2413. Smallest Even Multiple', link: '/Entry Level 20 Questions/2413. Smallest Even Multiple.md' },
+          { text: '2236. Root Equals Sum of Children', link: '/Entry Level 20 Questions/2236. Root Equals Sum of Children.md' },
+         
         ]
       }
     ],
 
     socialLinks: [
-      { icon: 'github', link: 'https://github.com/vuejs/vitepress' }
+      { icon: 'github', link: 'https://github.com/VinciCantCode/LeetCode.git' }
     ]
   }
 })
