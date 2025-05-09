@@ -25,7 +25,8 @@ export default defineConfig({
           { text: '2236. Root Equals Sum of Children', link: '/Entry Level 20 Questions/2236. Root Equals Sum of Children.md' },
           { text: '1486. XOR Operation in an Array', link: '/Entry Level 20 Questions/1486. XOR Operation in an Array.md' },
           { text: '1512. Number of Good Pairs', link: '/Entry Level 20 Questions/1512. Number of Good Pairs.md' },
-
+          { text: '1534. Count Good Triplets', link: '/Entry Level 20 Questions/1534. Count Good Triplets.md' },
+          
         ]
       }
     ],
