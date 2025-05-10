@@ -26,6 +26,9 @@ export default defineConfig({
           { text: '1486. XOR Operation in an Array', link: '/Entry Level 20 Questions/1486. XOR Operation in an Array.md' },
           { text: '1512. Number of Good Pairs', link: '/Entry Level 20 Questions/1512. Number of Good Pairs.md' },
           { text: '1534. Count Good Triplets', link: '/Entry Level 20 Questions/1534. Count Good Triplets.md' },
+          { text: '584. Find Customer Referee', link: '/Entry Level 20 Questions/584. Find Customer Referee.md' },
+          { text: '1757. Recyclable and Low Fat Products', link: '/Entry Level 20 Questions/1757. Recyclable and Low Fat Products.md' },
+          { text: '258. Add Digits', link: '/Entry Level 20 Questions/258. Add Digits.md' },
           
         ]
       }
