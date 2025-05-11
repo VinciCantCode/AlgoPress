@@ -3,16 +3,16 @@
 layout: home
 
 hero:
-  name: "LeetCode"
+  name: "Vinci's LeetCode"
   text: "Record my algorithm learning process"
   tagline: My great project tagline
   actions:
     - theme: brand
-      text: Markdown Examples
-      link: /markdown-examples
+      text: Introduction
+      link: /Welcome to My LeetCode/Introduction
     - theme: alt
-      text: API Examples
-      link: /api-examples
+      text: Entry Level 20 Questions
+      link: /Entry Level 20 Questions/Introduction
 
 features:
   - title: Feature A

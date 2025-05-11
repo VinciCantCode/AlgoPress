@@ -4,7 +4,7 @@ import { defineConfig } from 'vitepress'
 export default defineConfig({
   title: "LeetCode",
   description: "Record my algorithm learning process",
-  base:'/LeetCode',
+  base: '/LeetCode',
   themeConfig: {
     // https://vitepress.dev/reference/default-theme-config
     nav: [
@@ -13,12 +13,22 @@ export default defineConfig({
     ],
 
     sidebar: [
+
+      {
+        text: 'Welcome to My LeetCode',
+        collapsed: false,
+        items: [
+          { text: 'Introduction', link: '/Welcome to My LeetCode/Introduction.md' },
+        ]
+      },
+
       {
         text: 'Entry Level 20 Questions',
         collapsed: false,
         items: [
           // { text: 'Markdown Examples', link: '/markdown-examples' },
           // { text: 'Runtime API Examples', link: '/api-examples' },
+          { text: 'Introduction', link: '/Entry Level 20 Questions/Introduction.md' },
           { text: '2235. Add Two Integers', link: '/Entry Level 20 Questions/2235. Add Two Integers.md' },
           { text: '2469. Convert the Temperature', link: '/Entry Level 20 Questions/2469. Convert the Temperature.md' },
           { text: '2413. Smallest Even Multiple', link: '/Entry Level 20 Questions/2413. Smallest Even Multiple.md' },
@@ -29,7 +39,9 @@ export default defineConfig({
           { text: '584. Find Customer Referee', link: '/Entry Level 20 Questions/584. Find Customer Referee.md' },
           { text: '1757. Recyclable and Low Fat Products', link: '/Entry Level 20 Questions/1757. Recyclable and Low Fat Products.md' },
           { text: '258. Add Digits', link: '/Entry Level 20 Questions/258. Add Digits.md' },
-          
+          { text: '1281. Subtract the Product and Sum of Digits of an Integer', link: '/Entry Level 20 Questions/1281. Subtract the Product and Sum of Digits of an Integer.md' },
+          { text: '231. Power of Two', link: '/Entry Level 20 Questions/231. Power of Two.md' },
+          { text: '326. Power of Three', link: '/Entry Level 20 Questions/326. Power of Three.md' },
         ]
       }
     ],
