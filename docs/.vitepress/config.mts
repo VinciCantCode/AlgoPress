@@ -42,6 +42,7 @@ export default defineConfig({
           { text: '1281. Subtract the Product and Sum of Digits of an Integer', link: '/Entry Level 20 Questions/1281. Subtract the Product and Sum of Digits of an Integer.md' },
           { text: '231. Power of Two', link: '/Entry Level 20 Questions/231. Power of Two.md' },
           { text: '326. Power of Three', link: '/Entry Level 20 Questions/326. Power of Three.md' },
+          { text: '264. Ugly Number', link: '/Entry Level 20 Questions/264. Ugly Number.md' },
         ]
       }
     ],
