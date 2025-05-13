@@ -43,6 +43,8 @@ export default defineConfig({
           { text: '231. Power of Two', link: '/Entry Level 20 Questions/231. Power of Two.md' },
           { text: '326. Power of Three', link: '/Entry Level 20 Questions/326. Power of Three.md' },
           { text: '264. Ugly Number', link: '/Entry Level 20 Questions/264. Ugly Number.md' },
+          { text: '1470. Shuffle the Array', link: '/Entry Level 20 Questions/1470. Shuffle the Array.md' },
+          { text: '867. Transpose Matrix', link: '/Entry Level 20 Questions/867. Transpose Matrix.md' },
         ]
       }
     ],
