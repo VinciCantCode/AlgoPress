@@ -45,6 +45,8 @@ export default defineConfig({
           { text: '264. Ugly Number', link: '/Entry Level 20 Questions/264. Ugly Number.md' },
           { text: '1470. Shuffle the Array', link: '/Entry Level 20 Questions/1470. Shuffle the Array.md' },
           { text: '867. Transpose Matrix', link: '/Entry Level 20 Questions/867. Transpose Matrix.md' },
+          { text: '167. Two Sum II - Input Array Is Sorted', link: '/Entry Level 20 Questions/167. Two Sum II - Input Array Is Sorted.md' },
+          { text: '15. 3Sum', link: '/Entry Level 20 Questions/15. 3Sum.md' },
         ]
       }
     ],
