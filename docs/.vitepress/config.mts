@@ -66,6 +66,7 @@ export default defineConfig({
         collapsed: false,
         items: [
           { text: '852. Peak Index in a Mountain Array', link: '/Binary Search/852. Peak Index in a Mountain Array.md' },
+          { text: '34. Find First and Last Position of Element in Sorted Array', link: '/Binary Search/34. Find First and Last Position of Element in Sorted Array.md' },
         ]
       }
     ],

@@ -48,8 +48,7 @@ class Solution:
 
 ## Complexity
 
-Time complexity: O(log n)
+Time complexity: O(n)
 
-Assume we perform the division by 2 for K times. Then, we can say the number N is at least 2<sup>K</sup>, which means N ≤ 2<sup>K</sup>. Therefore K ≤ log<sub>2</sub>N.
 
 Space complexity: O(1)
