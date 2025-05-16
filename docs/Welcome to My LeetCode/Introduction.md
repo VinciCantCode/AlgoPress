@@ -1,5 +1,9 @@
 # Welcome to My LeetCode Journey
 
+## Algorithm Roadmap 
+
+[![Algorithm Roadmap](../images/leetcode_Roadmap.png)](https://neetcode.io/roadmap "NeetCode Roadmap")
+
 ## Introduction
 
 Welcome to my LeetCode learning journey! This space is dedicated to documenting my progress, solutions, and insights as I work through various LeetCode problems. Whether you're a fellow learner or just curious about my approach, I hope you find this repository helpful.

@@ -45,10 +45,27 @@ export default defineConfig({
           { text: '264. Ugly Number', link: '/Entry Level 20 Questions/264. Ugly Number.md' },
           { text: '1470. Shuffle the Array', link: '/Entry Level 20 Questions/1470. Shuffle the Array.md' },
           { text: '867. Transpose Matrix', link: '/Entry Level 20 Questions/867. Transpose Matrix.md' },
-          { text: '167. Two Sum II - Input Array Is Sorted', link: '/Entry Level 20 Questions/167. Two Sum II - Input Array Is Sorted.md' },
-          { text: '15. 3Sum', link: '/Entry Level 20 Questions/15. 3Sum.md' },
           { text: '1422. Maximum Score After Splitting a String', link: '/Entry Level 20 Questions/1422. Maximum Score After Splitting a String.md' },
           { text: '2586. Count the Number of Vowel Strings in Range', link: '/Entry Level 20 Questions/2586. Count the Number of Vowel Strings in Range.md' },
+        ]
+      },
+
+      {
+        text: 'Two Pointers (from oppsite ends)',
+        collapsed: false,
+        items: [
+          { text: '167. Two Sum II - Input Array Is Sorted', link: '/Two Pointers (from oppsite ends)/167. Two Sum II - Input Array Is Sorted.md' },
+          { text: '15. 3Sum', link: '/Two Pointers (from oppsite ends)/15. 3Sum.md' },
+          { text: '11. Container With Most Water', link: '/Two Pointers (from oppsite ends)/11. Container With Most Water.md' },
+          { text: '42. Trapping Rain Water', link: '/Two Pointers (from oppsite ends)/42. Trapping Rain Water.md' },
+        ]
+      },
+
+      {
+        text: 'Binary Search',
+        collapsed: false,
+        items: [
+          { text: '852. Peak Index in a Mountain Array', link: '/Binary Search/852. Peak Index in a Mountain Array.md' },
         ]
       }
     ],
