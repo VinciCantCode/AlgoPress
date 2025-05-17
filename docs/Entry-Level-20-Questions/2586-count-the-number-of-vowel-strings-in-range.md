@@ -1,4 +1,5 @@
 # 2586. Count the Number of Vowel Strings in Range
+<Badge type="tip" text="Easy" />[<Badge type="info" text="LeetCode" />](https://leetcode.com/problems/count-the-number-of-vowel-strings-in-range/ "Let's go to leetcode")
 
 AYou are given a 0-indexed array of string words and two integers left and right.
 

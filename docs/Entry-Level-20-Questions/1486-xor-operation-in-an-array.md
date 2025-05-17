@@ -1,4 +1,5 @@
 # 1486. XOR Operation in an Array
+<Badge type="tip" text="Easy" />[<Badge type="info" text="LeetCode" />](https://leetcode.com/problems/xor-operation-in-an-array/ "Let's go to leetcode")
 
 You are given an integer n and an integer start.
 

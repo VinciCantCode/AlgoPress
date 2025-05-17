@@ -1,4 +1,5 @@
 # 2235. Add Two Integers
+<Badge type="tip" text="Easy" />[<Badge type="info" text="LeetCode" />](https://leetcode.com/problems/add-two-integers/ "Let's go to leetcode")
 
 Given two integers num1 and num2, return the sum of the two integers.
 

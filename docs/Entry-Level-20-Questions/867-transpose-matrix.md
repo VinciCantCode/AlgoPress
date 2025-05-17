@@ -1,4 +1,5 @@
 # 867. Transpose Matrix
+<Badge type="tip" text="Easy" />[<Badge type="info" text="LeetCode" />](https://leetcode.com/problems/transpose-matrix/ "Let's go to leetcode")
 
 Given a 2D integer array matrix, return the transpose of matrix.
 

@@ -1,4 +1,5 @@
 # 584. Find Customer Referee
+<Badge type="tip" text="Easy" />[<Badge type="info" text="LeetCode" />](https://leetcode.com/problems/find-customer-referee/ "Let's go to leetcode")
 
 | Column Name | Type    |
 |-------------|---------|

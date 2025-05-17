@@ -1,4 +1,5 @@
 # 1422. Maximum Score After Splitting a String
+<Badge type="tip" text="Easy" />[<Badge type="info" text="LeetCode" />](https://leetcode.com/problems/maximum-score-after-splitting-a-string/ "Let's go to leetcode")
 
 Given a string s of zeros and ones, return the maximum score after splitting the string into two non-empty substrings (i.e. left substring and right substring).
 

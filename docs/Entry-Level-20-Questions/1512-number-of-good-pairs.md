@@ -1,4 +1,5 @@
 # 1512. Number of Good Pairs
+<Badge type="tip" text="Easy" />[<Badge type="info" text="LeetCode" />](https://leetcode.com/problems/number-of-good-pairs/ "Let's go to leetcode")
 
 Given an array of integers nums, return the number of good pairs.
 

@@ -1,4 +1,5 @@
 # 2469. Convert the Temperature
+<Badge type="tip" text="Easy" />[<Badge type="info" text="LeetCode" />](https://leetcode.com/problems/convert-the-temperature/ "Let's go to leetcode")
 
 You are given a non-negative floating point number rounded to two decimal places celsius, that denotes the temperature in Celsius.
 

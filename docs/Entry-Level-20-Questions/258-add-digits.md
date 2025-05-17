@@ -1,4 +1,5 @@
 # 258. Add Digits
+<Badge type="tip" text="Easy" />[<Badge type="info" text="LeetCode" />](https://leetcode.com/problems/add-digits/ "Let's go to leetcode")
 
 Given an integer num, repeatedly add all its digits until the result has only one digit, and return it.
 

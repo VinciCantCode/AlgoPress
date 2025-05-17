@@ -1,4 +1,5 @@
 # 1470. Shuffle the Array
+<Badge type="tip" text="Easy" />[<Badge type="info" text="LeetCode" />](https://leetcode.com/problems/shuffle-the-array/ "Let's go to leetcode")
 
 Given the array nums consisting of 2n elements in the form [x1,x2,...,xn,y1,y2,...,yn].
 

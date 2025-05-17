@@ -1,4 +1,5 @@
 # 326. Power of Three
+<Badge type="tip" text="Easy" />[<Badge type="info" text="LeetCode" />](https://leetcode.com/problems/power-of-three/ "Let's go to leetcode")
 
 Given an integer n, return true if it is a power of three. Otherwise, return false.
 

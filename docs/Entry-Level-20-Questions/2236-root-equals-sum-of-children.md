@@ -1,4 +1,5 @@
 # 2236. Root Equals Sum of Children
+<Badge type="tip" text="Easy" />[<Badge type="info" text="LeetCode" />](https://leetcode.com/problems/root-equals-sum-of-children/ "Let's go to leetcode")
 
 You are given the root of a binary tree that consists of exactly 3 nodes: the root, its left child, and its right child.
 

@@ -1,4 +1,5 @@
 # 1757. Recyclable and Low Fat Products
+<Badge type="tip" text="Easy" />[<Badge type="info" text="LeetCode" />](https://leetcode.com/problems/recyclable-and-low-fat-products/ "Let's go to leetcode")
 
 | Column Name | Type    |
 |-------------|---------|

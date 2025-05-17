@@ -1,4 +1,5 @@
-# 263. Ugly Number
+# 264. Ugly Number
+<Badge type="tip" text="Easy" />[<Badge type="info" text="LeetCode" />](https://leetcode.com/problems/ugly-number/ "Let's go to leetcode")
 
 An ugly number is a positive integer which does not have a prime factor other than 2, 3, and 5.
 

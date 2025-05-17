@@ -1,4 +1,5 @@
 # 1534. Count Good Triplets
+<Badge type="tip" text="Easy" />[<Badge type="info" text="LeetCode" />](https://leetcode.com/problems/count-good-triplets/ "Let's go to leetcode")
 
 Given an array of integers arr, and three integers a, b and c. You need to find the number of good triplets.
 

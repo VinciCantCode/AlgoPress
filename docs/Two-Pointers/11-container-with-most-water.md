@@ -1,4 +1,5 @@
 # 11. Container With Most Water
+<Badge type="warning" text="Medium" />[<Badge type="info" text="LeetCode" />](https://leetcode.com/problems/container-with-most-water/ "Let's go to leetcode")
 
 You are given an integer array height of length n. There are n vertical lines drawn such that the two endpoints of the ith line are (i, 0) and (i, height[i]).
 
