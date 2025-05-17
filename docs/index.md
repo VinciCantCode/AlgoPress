@@ -9,16 +9,16 @@ hero:
   actions:
     - theme: brand
       text: Introduction
-      link: /Welcome to My LeetCode/Introduction
+      link: /Welcome-to-My-LeetCode/introduction
     - theme: alt
       text: Entry Level 20 Questions
-      link: /Entry Level 20 Questions/Introduction
+      link: /Entry-Level-20-Questions/introduction
     - theme: alt
       text: Two Pointers
-      link: /Two Pointers (from oppsite ends)/167. Two Sum II - Input Array Is Sorted
+      link: /Two-Pointers/167-two-sum-ii---input-array-is-sorted
     - theme: alt
       text: Binary Search
-      link: /Binary Search/852. Peak Index in a Mountain Array
+      link: /Binary-Search/852-peak-index-in-a-mountain-array
 # features:
 #   - title: Feature A
 #     details: Lorem ipsum dolor sit amet, consectetur adipiscing elit

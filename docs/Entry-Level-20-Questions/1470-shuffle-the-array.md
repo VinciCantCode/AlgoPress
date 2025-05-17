@@ -16,7 +16,7 @@ Example 2:
 Example 3:
 > Input: nums = [1,1,2,2], n = 2
 > Output: [1,2,1,2]
-
+ 
 ## Constraints:
 - `1 <= n <= 500`
 - `nums.length == 2n`
@@ -41,7 +41,7 @@ class Solution:
         for i in range(n):
             result[2 * i] = nums[i]
             result[2 * i + 1] = nums[i + n]
-        return result
+        return result 
 ```
 
 Build the result array by appending elements one by one.
@@ -53,7 +53,7 @@ class Solution:
         for i in range(n):
             result.append(nums[i])
             result.append(nums[i + n])
-        return result
+        return result 
 ```
 
 ## Complexity

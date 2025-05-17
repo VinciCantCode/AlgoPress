@@ -1,6 +1,6 @@
 # Welcome to My LeetCode Journey
 
-## Algorithm Roadmap 
+## Algorithm Roadmap
 
 [![Algorithm Roadmap](../images/leetcode_Roadmap.png)](https://neetcode.io/roadmap "NeetCode Roadmap")
 
