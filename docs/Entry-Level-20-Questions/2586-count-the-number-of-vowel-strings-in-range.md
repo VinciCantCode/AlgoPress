@@ -30,10 +30,10 @@ Example 2:
 > - "artro" is a vowel string because it starts with 'a' and ends with 'o'.
 > The number of vowel strings in the mentioned range is 3.
 
-## Constraints:
+Constraints:
 - `1 <= words.length <= 1000`
 - `1 <= words[i].length <= 10`
-- `words[i]` consists of only lowercase English letters.
+- `words[i]` consists of only lowercase English letters
 - `0 <= left <= right < words.length`
 
 ## How to solve the problem

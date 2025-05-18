@@ -23,10 +23,10 @@ Example 2:
 >
 > Output: 1
 
-## Constraints:
+Constraints:
 - `n == height.length`
 - `2 <= n <= 10^5`
-- `0 <= height[i] <= 10^4`dd
+- `0 <= height[i] <= 10^4`
 
 ## How to solve the problem
 

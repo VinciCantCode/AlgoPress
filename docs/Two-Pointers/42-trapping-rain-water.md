@@ -17,9 +17,8 @@ Example 2:
 >
 > Output: 9
 
-## Constraints:
-- `n == height.length`
-- `1 <= n <= 2 * 10^4`
+Constraints:
+- `1 <= height.length <= 2 * 10^4`
 - `0 <= height[i] <= 10^5`
 
 ## How to solve the problem

@@ -35,9 +35,9 @@ Example 3:
 >
 > Output: 3
 
-## Constraints:
+Constraints:
 - `2 <= s.length <= 500`
-- The string s consists of characters '0' and '1' only.
+- `s[i]` is either '0' or '1'.
 
 ## How to solve the problem
 

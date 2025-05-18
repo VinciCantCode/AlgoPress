@@ -26,10 +26,12 @@ Example 3:
 
 ## Constraints
 
-- `0 <= nums.length <= 10^5`
+Constraints:
+- `1 <= nums.length <= 10^5`
 - `-10^9 <= nums[i] <= 10^9`
-- `nums` is a non-decreasing array
-- `-10^9 <= target <= 10^9`
+- nums is sorted in non-decreasing order.
+- `nums` contains only integers.
+- `target` is an integer.
 
 ## How to solve the problem
 1. Not a good solution with T = O(n)

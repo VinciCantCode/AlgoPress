@@ -5,11 +5,14 @@ export default defineConfig({
   title: "LeetCode",
   description: "Record my algorithm learning process",
   base: '/LeetCode',
+  head: [
+    ['link', { rel: 'icon', href: '/LeetCode/favicon.png' }]
+  ],
   themeConfig: {
     // https://vitepress.dev/reference/default-theme-config
     nav: [
       { text: 'Home', link: '/' },
-      { text: 'Examples', link: '/markdown-examples' }
+      // { text: 'Examples', link: '/markdown-examples' }
     ],
 
     sidebar: [
@@ -65,6 +68,9 @@ export default defineConfig({
         items: [
           { text: '852. Peak Index in a Mountain Array', link: '/Binary-Search/852-peak-index-in-a-mountain-array.md' },
           { text: '34. Find First and Last Position of Element in Sorted Array', link: '/Binary-Search/34-find-first-and-last-position-of-element-in-sorted-array.md' },
+          { text: '162. Find Peak Element', link: '/Binary-Search/162-find-peak-element.md' },
+          { text: '153. Find Minimum in Rotated Sorted Array', link: '/Binary-Search/153-find-minimum-in-rotated-sorted-array.md' },
+          { text: '33. Search in Rotated Sorted Array', link: '/Binary-Search/33-search-in-rotated-sorted-array.md' },
         ]
       }
     ],

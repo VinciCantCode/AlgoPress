@@ -22,7 +22,7 @@ Example 3:
 >
 > Output: 1
 
-## Constraints:
+Constraints:
 - `3 <= arr.length <= 10^5`
 - `0 <= arr[i] <= 10^6`
 - `arr` is guaranteed to be a mountain array.
