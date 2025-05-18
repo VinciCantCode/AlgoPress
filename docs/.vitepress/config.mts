@@ -27,7 +27,7 @@ export default defineConfig({
 
       {
         text: 'Entry Level 20 Questions',
-        collapsed: false,
+        collapsed: true,
         items: [
           { text: 'Introduction', link: '/Entry-Level-20-Questions/introduction.md' },
           { text: '2235. Add Two Integers', link: '/Entry-Level-20-Questions/2235-add-two-integers.md' },
