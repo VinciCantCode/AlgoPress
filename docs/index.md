@@ -19,6 +19,9 @@ hero:
     - theme: alt
       text: Binary Search
       link: /Binary-Search/852-peak-index-in-a-mountain-array
+    - theme: alt
+      text: Sliding Window
+      link: /Sliding-Window/209-minimum-size-subarray-sum
 # features:
 #   - title: Feature A
 #     details: Lorem ipsum dolor sit amet, consectetur adipiscing elit
