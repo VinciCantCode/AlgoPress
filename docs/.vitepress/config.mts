@@ -72,6 +72,14 @@ export default defineConfig({
           { text: '153. Find Minimum in Rotated Sorted Array', link: '/Binary-Search/153-find-minimum-in-rotated-sorted-array.md' },
           { text: '33. Search in Rotated Sorted Array', link: '/Binary-Search/33-search-in-rotated-sorted-array.md' },
         ]
+      },
+
+      {
+        text: 'Sliding Window',
+        collapsed: false,
+        items: [
+          { text: '209. Minimum Size Subarray Sum', link: '/Sliding-Window/209-minimum-size-subarray-sum.md' },
+        ]
       }
     ],
 
