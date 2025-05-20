@@ -15,13 +15,13 @@ hero:
       link: /Entry-Level-20-Questions/introduction
     - theme: alt
       text: Two Pointers
-      link: /Two-Pointers/167-two-sum-ii---input-array-is-sorted
-    - theme: alt
-      text: Binary Search
-      link: /Binary-Search/852-peak-index-in-a-mountain-array
+      link: /Two-Pointers/167
     - theme: alt
       text: Sliding Window
-      link: /Sliding-Window/209-minimum-size-subarray-sum
+      link: /Sliding-Window/209
+    - theme: alt
+      text: Binary Search
+      link: /Binary-Search/852
 # features:
 #   - title: Feature A
 #     details: Lorem ipsum dolor sit amet, consectetur adipiscing elit
