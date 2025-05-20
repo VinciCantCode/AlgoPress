@@ -6,7 +6,8 @@ export default defineConfig({
   description: "Record my algorithm learning process",
   base: '/LeetCode',
   head: [
-    ['link', { rel: 'icon', href: '/LeetCode/favicon.png' }]
+    ['link', { rel: 'icon', href: '/LeetCode/favicon.png' }],
+    ['link', { rel: 'icon', href: '/favicon.png' }]
   ],
   themeConfig: {
     // https://vitepress.dev/reference/default-theme-config
