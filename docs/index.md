@@ -22,6 +22,10 @@ hero:
     - theme: alt
       text: Binary Search
       link: /Binary-Search/852
+    - theme: alt
+      text: Linked List
+      link: /Linked-List/206
+
 # features:
 #   - title: Feature A
 #     details: Lorem ipsum dolor sit amet, consectetur adipiscing elit

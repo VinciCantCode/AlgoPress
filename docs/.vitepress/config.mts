@@ -83,6 +83,14 @@ export default defineConfig({
           { text: '713. Subarray Product Less Than K', link: '/Sliding-Window/713.md' },
           { text: '3. Longest Substring Without Repeating Characters', link: '/Sliding-Window/3.md' },
         ]
+      },
+
+      {
+        text: 'Linked List',
+        collapsed: false,
+        items: [
+          { text: '206. Reverse Linked List', link: '/Linked-List/206.md' },
+        ]
       }
     ],
 
