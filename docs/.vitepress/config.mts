@@ -93,6 +93,7 @@ export default defineConfig({
           { text: '24. Swap Nodes in Pairs', link: '/Linked-List/24.md' },
           { text: '19. Remove Nth Node From End of List', link: '/Linked-List/19.md' },
           { text: '83. Remove Duplicates from Sorted List', link: '/Linked-List/83.md' },
+          { text: '876. Middle of the Linked List', link: '/Linked-List/876.md' },
         ]
       }
     ],
