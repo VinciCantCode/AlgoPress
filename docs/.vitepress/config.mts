@@ -94,6 +94,7 @@ export default defineConfig({
           { text: '19. Remove Nth Node From End of List', link: '/Linked-List/19.md' },
           { text: '83. Remove Duplicates from Sorted List', link: '/Linked-List/83.md' },
           { text: '876. Middle of the Linked List', link: '/Linked-List/876.md' },
+          { text: '141. Linked List Cycle', link: '/Linked-List/141.md' },
         ]
       }
     ],
