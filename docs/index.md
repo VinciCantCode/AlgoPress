@@ -25,6 +25,10 @@ hero:
     - theme: alt
       text: Linked List
       link: /Linked-List/206
+    - theme: alt
+      text: Hash Table
+      link: /Hash-table/242
+
 
 # features:
 #   - title: Feature A
