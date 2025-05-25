@@ -27,7 +27,7 @@ hero:
       link: /Linked-List/206
     - theme: alt
       text: Hash Table
-      link: /Hash-table/242
+      link: /Hash-Table/242
 
 
 # features:

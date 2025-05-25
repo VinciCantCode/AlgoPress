@@ -104,6 +104,7 @@ export default defineConfig({
         collapsed: false,
         items: [
           { text: '242. Valid Anagram', link: '/Hash-Table/242.md' },
+          { text: '349. Intersection of Two Arrays', link: '/Hash-Table/349.md' },
         ]
       }
     ],
