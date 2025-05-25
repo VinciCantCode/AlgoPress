@@ -95,6 +95,15 @@ export default defineConfig({
           { text: '83. Remove Duplicates from Sorted List', link: '/Linked-List/83.md' },
           { text: '876. Middle of the Linked List', link: '/Linked-List/876.md' },
           { text: '141. Linked List Cycle', link: '/Linked-List/141.md' },
+          { text: '142. Linked List Cycle II', link: '/Linked-List/142.md' },
+        ]
+      },
+
+      {
+        text: 'Hash Table',
+        collapsed: false,
+        items: [
+          { text: '242. Valid Anagram', link: '/Hash-Table/242.md' },
         ]
       }
     ],
