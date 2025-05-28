@@ -28,6 +28,10 @@ hero:
     - theme: alt
       text: Hash Table
       link: /Hash-Table/242
+    - theme: alt
+      text: Binary Tree
+      link: /Binary-Tree/104
+    
 
 
 # features:

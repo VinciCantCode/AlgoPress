@@ -107,6 +107,14 @@ export default defineConfig({
           { text: '349. Intersection of Two Arrays', link: '/Hash-Table/349.md' },
           { text: '18. 4Sum', link: '/Hash-Table/18.md' },
         ]
+      },
+
+      {
+        text: 'Binary Tree',
+        collapsed: false,
+        items: [
+          { text: '104. Maximum Depth of Binary Tree', link: '/Binary-Tree/104.md' },
+        ]
       }
     ],
 
