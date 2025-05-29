@@ -114,6 +114,9 @@ export default defineConfig({
         collapsed: false,
         items: [
           { text: '104. Maximum Depth of Binary Tree', link: '/Binary-Tree/104.md' },
+          { text: '100. Same Tree', link: '/Binary-Tree/100.md' }, 
+          { text: '110. Balanced Binary Tree', link: '/Binary-Tree/110.md' },
+          { text: '199. Binary Tree Right Side View', link: '/Binary-Tree/199.md' },
         ]
       }
     ],
