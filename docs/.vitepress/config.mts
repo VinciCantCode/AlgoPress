@@ -118,6 +118,7 @@ export default defineConfig({
           { text: '110. Balanced Binary Tree', link: '/Binary-Tree/110.md' },
           { text: '199. Binary Tree Right Side View', link: '/Binary-Tree/199.md' },
           { text: '98. Validate Binary Search Tree', link: '/Binary-Tree/98.md' },
+          { text: '236. Lowest Common Ancestor of a Binary Tree', link: '/Binary-Tree/236.md' },
         ]
       }
     ],
