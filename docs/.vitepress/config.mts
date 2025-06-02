@@ -120,6 +120,7 @@ export default defineConfig({
           { text: '98. Validate Binary Search Tree', link: '/Binary-Tree/98.md' },
           { text: '236. Lowest Common Ancestor of a Binary Tree', link: '/Binary-Tree/236.md' },
           { text: '235. Lowest Common Ancestor of a Binary Search Tree', link: '/Binary-Tree/235.md' },
+          { text: '102. Binary Tree Level Order Traversal', link: '/Binary-Tree/102.md' },
         ]
       }
     ],
