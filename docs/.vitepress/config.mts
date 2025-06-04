@@ -122,6 +122,7 @@ export default defineConfig({
           { text: '235. Lowest Common Ancestor of a Binary Search Tree', link: '/Binary-Tree/235.md' },
           { text: '102. Binary Tree Level Order Traversal', link: '/Binary-Tree/102.md' },
           { text: '103. Binary Tree Zigzag Level Order Traversal', link: '/Binary-Tree/103.md' },
+          { text: '513. Find Bottom Left Tree Value', link: '/Binary-Tree/513.md' },
         ]
       }
     ],
