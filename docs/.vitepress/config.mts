@@ -123,6 +123,9 @@ export default defineConfig({
           { text: '102. Binary Tree Level Order Traversal', link: '/Binary-Tree/102.md' },
           { text: '103. Binary Tree Zigzag Level Order Traversal', link: '/Binary-Tree/103.md' },
           { text: '513. Find Bottom Left Tree Value', link: '/Binary-Tree/513.md' },
+          { text: '144. Binary Tree Preorder Traversal', link: '/Binary-Tree/144.md' },
+          { text: '145. Binary Tree Postorder Traversal', link: '/Binary-Tree/145.md' },
+          { text: '94. Binary Tree Inorder Traversal', link: '/Binary-Tree/94.md' },
         ]
       }
     ],
