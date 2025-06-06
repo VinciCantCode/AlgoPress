@@ -64,6 +64,16 @@ export default defineConfig({
       },
 
       {
+        text: 'Sliding Window',
+        collapsed: false,
+        items: [
+          { text: '209. Minimum Size Subarray Sum', link: '/Sliding-Window/209.md' },
+          { text: '713. Subarray Product Less Than K', link: '/Sliding-Window/713.md' },
+          { text: '3. Longest Substring Without Repeating Characters', link: '/Sliding-Window/3.md' },
+        ]
+      },
+      
+      {
         text: 'Binary Search',
         collapsed: false,
         items: [
@@ -72,16 +82,6 @@ export default defineConfig({
           { text: '162. Find Peak Element', link: '/Binary-Search/162.md' },
           { text: '153. Find Minimum in Rotated Sorted Array', link: '/Binary-Search/153.md' },
           { text: '33. Search in Rotated Sorted Array', link: '/Binary-Search/33.md' },
-        ]
-      },
-
-      {
-        text: 'Sliding Window',
-        collapsed: false,
-        items: [
-          { text: '209. Minimum Size Subarray Sum', link: '/Sliding-Window/209.md' },
-          { text: '713. Subarray Product Less Than K', link: '/Sliding-Window/713.md' },
-          { text: '3. Longest Substring Without Repeating Characters', link: '/Sliding-Window/3.md' },
         ]
       },
 
@@ -126,6 +126,7 @@ export default defineConfig({
           { text: '144. Binary Tree Preorder Traversal', link: '/Binary-Tree/144.md' },
           { text: '145. Binary Tree Postorder Traversal', link: '/Binary-Tree/145.md' },
           { text: '94. Binary Tree Inorder Traversal', link: '/Binary-Tree/94.md' },
+          { text: '226. Invert Binary Tree', link: '/Binary-Tree/226.md' },
         ]
       }
     ],
