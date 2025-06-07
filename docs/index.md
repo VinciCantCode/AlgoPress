@@ -3,8 +3,8 @@
 layout: home
 
 hero:
-  name: "Vinci's LeetCode"
-  text: "Record my algorithm learning process"
+  name: "AlgoPress"
+  text: "Record the algorithm learning process"
   # tagline: My great project tagline
   actions:
     - theme: brand

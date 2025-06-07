@@ -2,11 +2,11 @@ import { defineConfig } from 'vitepress'
 
 // https://vitepress.dev/reference/site-config
 export default defineConfig({
-  title: "LeetCode",
-  description: "Record my algorithm learning process",
-  base: '/LeetCode',
+  title: "AlgoPress",
+  description: "Record the algorithm learning process",
+  base: '/AlgoPress',
   head: [
-    ['link', { rel: 'icon', href: '/LeetCode/favicon.png' }],
+    ['link', { rel: 'icon', href: '/AlgoPress/favicon.png' }],
     ['link', { rel: 'icon', href: '/favicon.png' }]
   ],
   themeConfig: {
@@ -132,7 +132,7 @@ export default defineConfig({
     ],
 
     socialLinks: [
-      { icon: 'github', link: 'https://github.com/VinciCantCode/LeetCode.git' }
+      { icon: 'github', link: 'https://github.com/VinciCantCode/AlgoPress.git' }
     ]
   }
 })
