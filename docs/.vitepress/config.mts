@@ -127,6 +127,7 @@ export default defineConfig({
           { text: '145. Binary Tree Postorder Traversal', link: '/Binary-Tree/145.md' },
           { text: '94. Binary Tree Inorder Traversal', link: '/Binary-Tree/94.md' },
           { text: '226. Invert Binary Tree', link: '/Binary-Tree/226.md' },
+          { text: '101. Symmetric Tree', link: '/Binary-Tree/101.md' },
         ]
       }
     ],
