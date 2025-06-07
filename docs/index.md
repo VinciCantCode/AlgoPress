@@ -7,7 +7,7 @@ hero:
   text: "Record the algorithm learning process"
   # tagline: My great project tagline
   image:
-    src: /images/logo.svg
+    src: /logo.svg
     alt: AlgoPress Logo
   actions:
     - theme: brand
