@@ -6,6 +6,9 @@ hero:
   name: "AlgoPress"
   text: "Record the algorithm learning process"
   # tagline: My great project tagline
+  image:
+    src: /images/logo.svg
+    alt: AlgoPress Logo
   actions:
     - theme: brand
       text: Introduction
@@ -34,12 +37,15 @@ hero:
     
 
 
-# features:
-#   - title: Feature A
-#     details: Lorem ipsum dolor sit amet, consectetur adipiscing elit
-#   - title: Feature B
-#     details: Lorem ipsum dolor sit amet, consectetur adipiscing elit
-#   - title: Feature C
-#     details: Lorem ipsum dolor sit amet, consectetur adipiscing elit
+features:
+  - icon: 📊
+    title: Visualized Learning Progress
+    details: Track your study journey and weak spots clearly with categorized problems and progress markers.
+  - icon: 🧩
+    title: Handy Algorithm Templates
+    details: Frequently used algorithm and data structure templates are provided for quick reference and reuse.
+  - icon: 💼
+    title: Curated Interview Questions
+    details: A collection of high-frequency interview questions from top tech companies to help you prepare efficiently.
 ---
 

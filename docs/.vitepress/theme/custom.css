@@ -1,0 +1,33 @@
+/* Hero image background gradient blur effect */
+.VPHomeHero .image-container {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 320px; 
+}
+
+.VPHomeHero .image-container::before {
+  content: "";
+  position: absolute;
+  z-index: 0;
+  width: 90%;
+  height: 90%;
+  left: 5%;
+  top: 5%;
+  background: radial-gradient(ellipse at 50% 50%, #bd34fe 0%, #41d1ff 100%);
+  filter: blur(60px);
+  opacity: 0.7;
+  pointer-events: none;
+}
+
+.VPHomeHero .image-container img {
+  position: absolute;
+  z-index: 1;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  display: block;
+  max-width: 100%;
+  height: auto;
+} 
