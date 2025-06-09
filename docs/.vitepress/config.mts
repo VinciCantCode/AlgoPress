@@ -1,5 +1,6 @@
 import { defineConfig } from 'vitepress'
 
+
 // https://vitepress.dev/reference/site-config
 export default defineConfig({
   title: "AlgoPress",
@@ -7,7 +8,8 @@ export default defineConfig({
   base: '/AlgoPress',
   head: [
     ['link', { rel: 'icon', href: '/AlgoPress/favicon.png' }],
-    ['link', { rel: 'icon', href: '/favicon.png' }]
+    ['link', { rel: 'icon', href: '/favicon.png' }],
+    ['script', { defer: '', src: 'https://vercel.com/analytics/script.js' }]
   ],
   themeConfig: {
     // https://vitepress.dev/reference/default-theme-config
