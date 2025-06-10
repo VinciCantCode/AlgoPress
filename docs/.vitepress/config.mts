@@ -132,6 +132,7 @@ export default defineConfig({
           { text: '101. Symmetric Tree', link: '/Binary-Tree/101.md' },
           { text: '111. Minimum Depth of Binary Tree', link: '/Binary-Tree/111.md' },
           { text: '222. Count Complete Tree Nodes', link: '/Binary-Tree/222.md' },
+          { text: '257. Binary Tree Paths', link: '/Binary-Tree/257.md' },
         ]
       }
     ],
