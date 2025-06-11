@@ -1,25 +1,37 @@
 {
-  "hash": "80e7a296",
+  "hash": "de9b8eaf",
   "configHash": "56cdb16c",
-  "lockfileHash": "b7ff5b6b",
-  "browserHash": "6cdff9e6",
+  "lockfileHash": "0dbdb27a",
+  "browserHash": "09838aea",
   "optimized": {
     "vue": {
       "src": "../../../../node_modules/vue/dist/vue.runtime.esm-bundler.js",
       "file": "vue.js",
-      "fileHash": "23aedaff",
+      "fileHash": "7773ef1c",
       "needsInterop": false
     },
     "vitepress > @vue/devtools-api": {
       "src": "../../../../node_modules/@vue/devtools-api/dist/index.js",
       "file": "vitepress___@vue_devtools-api.js",
-      "fileHash": "fd6d3ddf",
+      "fileHash": "b66c049c",
       "needsInterop": false
     },
     "vitepress > @vueuse/core": {
       "src": "../../../../node_modules/@vueuse/core/index.mjs",
       "file": "vitepress___@vueuse_core.js",
-      "fileHash": "5121db43",
+      "fileHash": "a73778cf",
+      "needsInterop": false
+    },
+    "@vercel/analytics": {
+      "src": "../../../../node_modules/@vercel/analytics/dist/index.mjs",
+      "file": "@vercel_analytics.js",
+      "fileHash": "958e1853",
+      "needsInterop": false
+    },
+    "@vercel/speed-insights": {
+      "src": "../../../../node_modules/@vercel/speed-insights/dist/index.mjs",
+      "file": "@vercel_speed-insights.js",
+      "fileHash": "b2705d14",
       "needsInterop": false
     }
   },
