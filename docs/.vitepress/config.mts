@@ -135,6 +135,7 @@ export default defineConfig({
           { text: '404. Sum of Left Leaves', link: '/Binary-Tree/404.md' },
           { text: '112. Path Sum', link: '/Binary-Tree/112.md' },
           { text: '106. Construct Binary Tree from Inorder and Postorder Traversal', link: '/Binary-Tree/106.md' },
+          { text: '654. Maximum Binary Tree', link: '/Binary-Tree/654.md' },
         ]
       }
     ],
