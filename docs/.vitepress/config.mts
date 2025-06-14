@@ -136,6 +136,8 @@ export default defineConfig({
           { text: '112. Path Sum', link: '/Binary-Tree/112.md' },
           { text: '106. Construct Binary Tree from Inorder and Postorder Traversal', link: '/Binary-Tree/106.md' },
           { text: '654. Maximum Binary Tree', link: '/Binary-Tree/654.md' },
+          { text: '617. Merge Two Binary Trees', link: '/Binary-Tree/617.md' },
+          { text: '700. Search in a Binary Search Tree', link: '/Binary-Tree/700.md' },
         ]
       }
     ],
