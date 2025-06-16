@@ -138,6 +138,7 @@ export default defineConfig({
           { text: '654. Maximum Binary Tree', link: '/Binary-Tree/654.md' },
           { text: '617. Merge Two Binary Trees', link: '/Binary-Tree/617.md' },
           { text: '700. Search in a Binary Search Tree', link: '/Binary-Tree/700.md' },
+          { text: '701. Insert into a Binary Search Tree', link: '/Binary-Tree/701.md' },
         ]
       }
     ],
