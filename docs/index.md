@@ -34,6 +34,9 @@ hero:
     - theme: alt
       text: Binary Tree
       link: /Binary-Tree/104
+    - theme: alt
+      text: Backtracking
+      link: /Backtracking/77
     
 
 

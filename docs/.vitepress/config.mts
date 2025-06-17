@@ -73,7 +73,7 @@ export default defineConfig({
           { text: '3. Longest Substring Without Repeating Characters', link: '/Sliding-Window/3.md' },
         ]
       },
-      
+
       {
         text: 'Binary Search',
         collapsed: false,
@@ -115,7 +115,7 @@ export default defineConfig({
         collapsed: false,
         items: [
           { text: '104. Maximum Depth of Binary Tree', link: '/Binary-Tree/104.md' },
-          { text: '100. Same Tree', link: '/Binary-Tree/100.md' }, 
+          { text: '100. Same Tree', link: '/Binary-Tree/100.md' },
           { text: '110. Balanced Binary Tree', link: '/Binary-Tree/110.md' },
           { text: '199. Binary Tree Right Side View', link: '/Binary-Tree/199.md' },
           { text: '98. Validate Binary Search Tree', link: '/Binary-Tree/98.md' },
@@ -139,6 +139,14 @@ export default defineConfig({
           { text: '617. Merge Two Binary Trees', link: '/Binary-Tree/617.md' },
           { text: '700. Search in a Binary Search Tree', link: '/Binary-Tree/700.md' },
           { text: '701. Insert into a Binary Search Tree', link: '/Binary-Tree/701.md' },
+        ]
+      },
+
+      {
+        text: 'Backtracking',
+        collapsed: false,
+        items: [
+          { text: '77. Combinations', link: '/Backtracking/77.md' },
         ]
       }
     ],
