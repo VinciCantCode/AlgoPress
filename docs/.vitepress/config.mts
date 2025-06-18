@@ -147,6 +147,7 @@ export default defineConfig({
         collapsed: false,
         items: [
           { text: '77. Combinations', link: '/Backtracking/77.md' },
+          { text: '216. Combination Sum III', link: '/Backtracking/216.md' },
         ]
       }
     ],
