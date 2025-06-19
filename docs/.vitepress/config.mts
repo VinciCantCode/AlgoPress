@@ -148,6 +148,7 @@ export default defineConfig({
         items: [
           { text: '77. Combinations', link: '/Backtracking/77.md' },
           { text: '216. Combination Sum III', link: '/Backtracking/216.md' },
+          { text: '17. Letter Combinations of a Phone Number', link: '/Backtracking/17.md' },
         ]
       }
     ],
