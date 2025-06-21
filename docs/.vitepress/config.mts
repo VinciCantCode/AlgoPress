@@ -150,6 +150,7 @@ export default defineConfig({
           { text: '216. Combination Sum III', link: '/Backtracking/216.md' },
           { text: '17. Letter Combinations of a Phone Number', link: '/Backtracking/17.md' },
           { text: '78. Subsets', link: '/Backtracking/78.md' },
+          { text: '131. Palindrome Partitioning', link: '/Backtracking/131.md' },
         ]
       }
     ],
