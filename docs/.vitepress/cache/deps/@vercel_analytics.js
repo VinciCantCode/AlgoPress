@@ -1,3 +1,5 @@
+import "./chunk-V4OQ3NZ2.js";
+
 // node_modules/@vercel/analytics/dist/index.mjs
 var name = "@vercel/analytics";
 var version = "1.5.0";

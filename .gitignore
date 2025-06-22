@@ -2,4 +2,6 @@
 .vitepress/dist
 node_modules
 .DS_Store
-.vercel
+.vercel # Deployed to Vercel
+.vitepress/supabase.ts # Supabase configuration
+docs/test-users.md  # Test files

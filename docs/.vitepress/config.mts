@@ -153,8 +153,17 @@ export default defineConfig({
           { text: '17. Letter Combinations of a Phone Number', link: '/Backtracking/17.md' },
           { text: '78. Subsets', link: '/Backtracking/78.md' },
           { text: '131. Palindrome Partitioning', link: '/Backtracking/131.md' },
+          { text: '22. Generate Parentheses', link: '/Backtracking/22.md' },
         ]
-      }
+      },
+
+      // {
+      //   text: 'User List',
+      //   collapsed: false,
+      //   items: [
+      //     { text: 'User List', link: '/test-users.md' },
+      //   ]
+      // }
     ],
 
     socialLinks: [
