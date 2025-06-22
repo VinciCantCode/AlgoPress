@@ -16,7 +16,9 @@ export default defineConfig({
       { text: 'Home', link: '/' },
       // { text: 'Examples', link: '/markdown-examples' }
     ],
-
+    search: {
+      provider: 'local'
+    },
     sidebar: [
 
       {
