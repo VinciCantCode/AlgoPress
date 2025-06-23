@@ -154,6 +154,7 @@ export default defineConfig({
           { text: '78. Subsets', link: '/Backtracking/78.md' },
           { text: '131. Palindrome Partitioning', link: '/Backtracking/131.md' },
           { text: '22. Generate Parentheses', link: '/Backtracking/22.md' },
+          { text: '46. Permutations', link: '/Backtracking/46.md' },
         ]
       },
 
