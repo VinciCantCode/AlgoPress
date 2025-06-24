@@ -13,7 +13,7 @@ if (typeof window !== 'undefined') {
 
 /** @type {import('vitepress').Theme} */
 export default {
-  // extends: DefaultTheme,
+  extends: DefaultTheme,
   Layout,
   // enhanceApp({ app }) {
   //   // Global Component Registration

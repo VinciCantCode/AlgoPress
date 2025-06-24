@@ -155,6 +155,7 @@ export default defineConfig({
           { text: '22. Generate Parentheses', link: '/Backtracking/22.md' },
           { text: '46. Permutations', link: '/Backtracking/46.md' },
           { text: '51. N-Queens', link: '/Backtracking/51.md' },
+          { text: '47. Permutations II', link: '/Backtracking/47.md' },
         ]
       },
 
