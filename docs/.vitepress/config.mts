@@ -157,6 +157,7 @@ export default defineConfig({
           { text: '47. Permutations II', link: '/Backtracking/47.md' },
           { text: '51. N-Queens', link: '/Backtracking/51.md' },
           { text: '491. Non-decreasing Subsequences', link: '/Backtracking/491.md' },
+          { text: '90. Subsets II', link: '/Backtracking/90.md' },
         ]
       },
 
