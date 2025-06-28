@@ -158,6 +158,7 @@ export default defineConfig({
           { text: '51. N-Queens', link: '/Backtracking/51.md' },
           { text: '491. Non-decreasing Subsequences', link: '/Backtracking/491.md' },
           { text: '90. Subsets II', link: '/Backtracking/90.md' },
+          { text: '39. Combination Sum', link: '/Backtracking/39.md' },
         ]
       },
 
