@@ -56,7 +56,7 @@ export default defineConfig({
 
       {
         text: 'Two Pointers',
-        collapsed: false,
+        collapsed: true,
         items: [
           { text: '167. Two Sum II - Input Array Is Sorted', link: '/Two-Pointers/167.md' },
           { text: '15. 3Sum', link: '/Two-Pointers/15.md' },
@@ -67,7 +67,7 @@ export default defineConfig({
 
       {
         text: 'Sliding Window',
-        collapsed: false,
+        collapsed: true,
         items: [
           { text: '209. Minimum Size Subarray Sum', link: '/Sliding-Window/209.md' },
           { text: '713. Subarray Product Less Than K', link: '/Sliding-Window/713.md' },
@@ -77,7 +77,7 @@ export default defineConfig({
 
       {
         text: 'Binary Search',
-        collapsed: false,
+        collapsed: true,
         items: [
           { text: '852. Peak Index in a Mountain Array', link: '/Binary-Search/852.md' },
           { text: '34. Find First and Last Position of Element in Sorted Array', link: '/Binary-Search/34.md' },
@@ -89,7 +89,7 @@ export default defineConfig({
 
       {
         text: 'Linked List',
-        collapsed: false,
+        collapsed: true,
         items: [
           { text: '206. Reverse Linked List', link: '/Linked-List/206.md' },
           { text: '24. Swap Nodes in Pairs', link: '/Linked-List/24.md' },
@@ -103,7 +103,7 @@ export default defineConfig({
 
       {
         text: 'Hash Table',
-        collapsed: false,
+        collapsed: true,
         items: [
           { text: '242. Valid Anagram', link: '/Hash-Table/242.md' },
           { text: '349. Intersection of Two Arrays', link: '/Hash-Table/349.md' },
@@ -113,7 +113,7 @@ export default defineConfig({
 
       {
         text: 'Binary Tree',
-        collapsed: false,
+        collapsed: true,
         items: [
           { text: '104. Maximum Depth of Binary Tree', link: '/Binary-Tree/104.md' },
           { text: '100. Same Tree', link: '/Binary-Tree/100.md' },
