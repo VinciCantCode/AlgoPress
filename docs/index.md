@@ -37,6 +37,9 @@ hero:
     - theme: alt
       text: Backtracking
       link: /Backtracking/77
+    - theme: alt
+      text: Dynamic Programming
+      link: /Dynamic-Programming/198
     
 
 

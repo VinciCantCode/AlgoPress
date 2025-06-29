@@ -145,7 +145,7 @@ export default defineConfig({
 
       {
         text: 'Backtracking',
-        collapsed: false,
+        collapsed: true,
         items: [
           { text: '77. Combinations', link: '/Backtracking/77.md' },
           { text: '216. Combination Sum III', link: '/Backtracking/216.md' },
@@ -159,6 +159,15 @@ export default defineConfig({
           { text: '491. Non-decreasing Subsequences', link: '/Backtracking/491.md' },
           { text: '90. Subsets II', link: '/Backtracking/90.md' },
           { text: '39. Combination Sum', link: '/Backtracking/39.md' },
+        ]
+      },
+
+      {
+        text: 'Dynamic Programming',
+        collapsed: false,
+        items: [
+          { text: '198. House Robber', link: '/Dynamic-Programming/198.md' },
+          { text: '70. Climbing Stairs', link: '/Dynamic-Programming/70.md' },
         ]
       },
 
