@@ -168,6 +168,7 @@ export default defineConfig({
         items: [
           { text: '198. House Robber', link: '/Dynamic-Programming/198.md' },
           { text: '70. Climbing Stairs', link: '/Dynamic-Programming/70.md' },
+          { text: '746. Min Cost Climbing Stairs', link: '/Dynamic-Programming/746.md' },
         ]
       },
 
