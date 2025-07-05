@@ -173,6 +173,7 @@ export default defineConfig({
           { text: '740. Delete and Earn', link: '/Dynamic-Programming/740.md' },
           { text: '2366. Count Ways To Build Good Strings', link: '/Dynamic-Programming/2366.md' },
           { text: '494. Target Sum', link: '/Dynamic-Programming/494.md' },
+          { text: '322. Coin Change', link: '/Dynamic-Programming/322.md' },
         ]
       },
 
