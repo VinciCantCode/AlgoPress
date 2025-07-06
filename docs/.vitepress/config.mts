@@ -174,6 +174,7 @@ export default defineConfig({
           { text: '2366. Count Ways To Build Good Strings', link: '/Dynamic-Programming/2366.md' },
           { text: '494. Target Sum', link: '/Dynamic-Programming/494.md' },
           { text: '322. Coin Change', link: '/Dynamic-Programming/322.md' },
+          { text: '1143. Longest Common Subsequence', link: '/Dynamic-Programming/1143.md' },
         ]
       },
 
