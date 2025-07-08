@@ -175,6 +175,7 @@ export default defineConfig({
           { text: '494. Target Sum', link: '/Dynamic-Programming/494.md' },
           { text: '322. Coin Change', link: '/Dynamic-Programming/322.md' },
           { text: '1143. Longest Common Subsequence', link: '/Dynamic-Programming/1143.md' },
+          { text: '72. Edit Distance', link: '/Dynamic-Programming/72.md' },
         ]
       },
 
