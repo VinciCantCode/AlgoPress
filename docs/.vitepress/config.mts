@@ -177,6 +177,7 @@ export default defineConfig({
           { text: '1143. Longest Common Subsequence', link: '/Dynamic-Programming/1143.md' },
           { text: '72. Edit Distance', link: '/Dynamic-Programming/72.md' },
           { text: '300. Longest Increasing Subsequence', link: '/Dynamic-Programming/300.md' },
+          { text: '122. Best Time to Buy and Sell Stock II', link: '/Dynamic-Programming/122.md' },
         ]
       },
 
