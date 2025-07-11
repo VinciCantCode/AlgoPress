@@ -179,6 +179,7 @@ export default defineConfig({
           { text: '300. Longest Increasing Subsequence', link: '/Dynamic-Programming/300.md' },
           { text: '122. Best Time to Buy and Sell Stock II', link: '/Dynamic-Programming/122.md' },
           { text: '309. Best Time to Buy and Sell Stock with Cooldown', link: '/Dynamic-Programming/309.md' },
+          { text: '188. Best Time to Buy and Sell Stock IV', link: '/Dynamic-Programming/188.md' },
 
         ]
       },
