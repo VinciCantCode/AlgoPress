@@ -181,6 +181,7 @@ export default defineConfig({
           { text: '309. Best Time to Buy and Sell Stock with Cooldown', link: '/Dynamic-Programming/309.md' },
           { text: '188. Best Time to Buy and Sell Stock IV', link: '/Dynamic-Programming/188.md' },
           { text: '516. Longest Palindromic Subsequence', link: '/Dynamic-Programming/516.md' },
+          { text: '1039. Minimum Score Triangulation of Polygon', link: '/Dynamic-Programming/1039.md' },
         ]
       },
 
