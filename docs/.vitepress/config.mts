@@ -63,6 +63,7 @@ export default defineConfig({
           { text: '11. Container With Most Water', link: '/Two-Pointers/11.md' },
           { text: '42. Trapping Rain Water', link: '/Two-Pointers/42.md' },
           { text: '125. Valid Palindrome', link: '/Two-Pointers/125.md' },
+          { text: '1616. Split Two Strings to Make Palindrome', link: '/Two-Pointers/1616.md' },
         ]
       },
 
