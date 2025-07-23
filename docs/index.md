@@ -40,6 +40,10 @@ hero:
     - theme: alt
       text: Dynamic Programming
       link: /Dynamic-Programming/198
+    - theme: alt
+      text: Design Data Structure
+      link: /Design-Data-Structure/211
+
     
 
 

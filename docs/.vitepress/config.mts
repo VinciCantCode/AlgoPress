@@ -66,6 +66,7 @@ export default defineConfig({
           { text: '1616. Split Two Strings to Make Palindrome', link: '/Two-Pointers/1616.md' },
           { text: '2105. Watering Plants II', link: '/Two-Pointers/2105.md' },
           { text: '2079. Watering Plants', link: '/Two-Pointers/2079.md' },
+          { text: '611. Valid Triangle Number', link: '/Two-Pointers/611.md' },
         ]
       },
 
@@ -187,6 +188,14 @@ export default defineConfig({
           { text: '516. Longest Palindromic Subsequence', link: '/Dynamic-Programming/516.md' },
           { text: '1039. Minimum Score Triangulation of Polygon', link: '/Dynamic-Programming/1039.md' },
           { text: '543. Diameter of Binary Tree', link: '/Dynamic-Programming/543.md' },
+        ]
+      },
+
+      {
+        text: 'Design Data Structure',
+        collapsed: true,
+        items: [
+          { text: '211. Design Add and Search Words Data Structure', link: '/Design-Data-Structure/211.md' },
         ]
       },
 
