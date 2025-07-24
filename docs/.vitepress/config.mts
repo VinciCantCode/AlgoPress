@@ -169,7 +169,7 @@ export default defineConfig({
 
       {
         text: 'Dynamic Programming',
-        collapsed: false,
+        collapsed: true,
         items: [
           { text: '198. House Robber', link: '/Dynamic-Programming/198.md' },
           { text: '213. House Robber II', link: '/Dynamic-Programming/213.md' },
