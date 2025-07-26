@@ -67,6 +67,7 @@ export default defineConfig({
           { text: '2105. Watering Plants II', link: '/Two-Pointers/2105.md' },
           { text: '2079. Watering Plants', link: '/Two-Pointers/2079.md' },
           { text: '611. Valid Triangle Number', link: '/Two-Pointers/611.md' },
+          { text: '16. 3Sum Closest', link: '/Two-Pointers/16.md' },
         ]
       },
 
