@@ -78,6 +78,7 @@ export default defineConfig({
           { text: '209. Minimum Size Subarray Sum', link: '/Sliding-Window/209.md' },
           { text: '713. Subarray Product Less Than K', link: '/Sliding-Window/713.md' },
           { text: '3. Longest Substring Without Repeating Characters', link: '/Sliding-Window/3.md' },
+          { text: '28. Find the Index of the First Occurrence in a String', link: '/Sliding-Window/28.md' },
         ]
       },
 
