@@ -43,6 +43,9 @@ hero:
     - theme: alt
       text: Design Data Structure
       link: /Design-Data-Structure/211
+    - theme: alt
+      text: Array And String
+      link: /Array-And-String/819
 
     
 

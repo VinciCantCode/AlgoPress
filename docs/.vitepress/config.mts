@@ -115,6 +115,7 @@ export default defineConfig({
           { text: '242. Valid Anagram', link: '/Hash-Table/242.md' },
           { text: '349. Intersection of Two Arrays', link: '/Hash-Table/349.md' },
           { text: '18. 4Sum', link: '/Hash-Table/18.md' },
+          { text: '819. Most Common Word', link: '/Hash-Table/819.md' },
         ]
       },
 
@@ -202,6 +203,12 @@ export default defineConfig({
         ]
       },
 
+      {
+        text: 'Arrays and Strings',
+        collapsed: true,
+        items: [
+        ]
+      },
       // {
       //   text: 'User List',
       //   collapsed: false,
