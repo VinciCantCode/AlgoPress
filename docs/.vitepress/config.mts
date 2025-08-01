@@ -116,6 +116,8 @@ export default defineConfig({
           { text: '349. Intersection of Two Arrays', link: '/Hash-Table/349.md' },
           { text: '18. 4Sum', link: '/Hash-Table/18.md' },
           { text: '819. Most Common Word', link: '/Hash-Table/819.md' },
+          { text: '387. First Unique Character in a String', link: '/Hash-Table/387.md' },
+          { text: '20. Valid Parentheses', link: '/Hash-Table/20.md' },
         ]
       },
 
