@@ -206,9 +206,10 @@ export default defineConfig({
       },
 
       {
-        text: 'Arrays and Strings',
+        text: 'Array and String',
         collapsed: true,
         items: [
+          { text: '238. Product of Array Except Self', link: '/Array-And-String/238.md' },
         ]
       },
       // {

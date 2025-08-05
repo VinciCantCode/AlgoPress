@@ -45,7 +45,7 @@ hero:
       link: /Design-Data-Structure/211
     - theme: alt
       text: Array And String
-      link: /Array-And-String/819
+      link: /Array-And-String/238
 
     
 
