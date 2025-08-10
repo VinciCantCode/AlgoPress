@@ -209,7 +209,8 @@ export default defineConfig({
         text: 'Array and String',
         collapsed: true,
         items: [
-          { text: '238. Product of Array Except Self', link: '/Array-And-String/238.md' },
+          { text: '238. Product of Array Except Self', link: '/Array-And-String/238.md' },  
+          { text: '268. Missing Number', link: '/Array-And-String/268.md' },
         ]
       },
       // {
