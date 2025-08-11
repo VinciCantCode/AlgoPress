@@ -211,6 +211,7 @@ export default defineConfig({
         items: [
           { text: '238. Product of Array Except Self', link: '/Array-And-String/238.md' },  
           { text: '268. Missing Number', link: '/Array-And-String/268.md' },
+          { text: '48. Rotate Image', link: '/Array-And-String/48.md' },
         ]
       },
       // {
