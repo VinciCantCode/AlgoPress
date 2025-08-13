@@ -213,6 +213,7 @@ export default defineConfig({
           { text: '268. Missing Number', link: '/Array-And-String/268.md' },
           { text: '48. Rotate Image', link: '/Array-And-String/48.md' },
           { text: '165. Compare Version Numbers', link: '/Array-And-String/165.md' },
+          { text: '151. Reverse Words in a String', link: '/Array-And-String/151.md' },
         ]
       },
       // {
