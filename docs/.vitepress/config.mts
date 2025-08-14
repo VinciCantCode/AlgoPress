@@ -212,6 +212,7 @@ export default defineConfig({
           { text: '238. Product of Array Except Self', link: '/Array-And-String/238.md' },  
           { text: '268. Missing Number', link: '/Array-And-String/268.md' },
           { text: '48. Rotate Image', link: '/Array-And-String/48.md' },
+          { text: '165. Compare Version Numbers', link: '/Array-And-String/165.md' },
         ]
       },
       // {
