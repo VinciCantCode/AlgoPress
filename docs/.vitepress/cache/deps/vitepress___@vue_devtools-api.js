@@ -3634,6 +3634,7 @@ var appRecordInfo = (_b17 = (_a17 = target).__VUE_DEVTOOLS_NEXT_APP_RECORD_INFO_
   id: 0,
   appIds: /* @__PURE__ */ new Set()
 };
+init_esm_shims2();
 function onDevToolsClientConnected(fn) {
   return new Promise((resolve) => {
     if (devtoolsState.connected && devtoolsState.clientConnected) {
