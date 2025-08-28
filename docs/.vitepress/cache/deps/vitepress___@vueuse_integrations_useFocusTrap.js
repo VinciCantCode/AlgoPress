@@ -3,13 +3,13 @@ import {
   toArray,
   tryOnScopeDispose,
   unrefElement
-} from "./chunk-VAQRGIME.js";
+} from "./chunk-Z5QSWKN2.js";
 import {
   computed,
   shallowRef,
   toValue,
   watch
-} from "./chunk-5KYYQTCL.js";
+} from "./chunk-LW4I4DCF.js";
 import "./chunk-V4OQ3NZ2.js";
 
 // node_modules/tabbable/dist/index.esm.js
@@ -394,7 +394,7 @@ function _toPrimitive(t, r) {
   if ("object" != typeof t || !t) return t;
   var e = t[Symbol.toPrimitive];
   if (void 0 !== e) {
-    var i = e.call(t, r);
+    var i = e.call(t, r || "default");
     if ("object" != typeof i) return i;
     throw new TypeError("@@toPrimitive must return a primitive value.");
   }
@@ -948,7 +948,7 @@ var createFocusTrap = function createFocusTrap2(elements, userOptions) {
       }
       state.active = true;
       state.paused = false;
-      state.nodeFocusedBeforeActivation = _getActiveElement(doc);
+      state.nodeFocusedBeforeActivation = doc.activeElement;
       onActivate === null || onActivate === void 0 || onActivate();
       var finishActivation = function finishActivation2() {
         if (checkCanFocusTrap) {
@@ -1139,7 +1139,7 @@ tabbable/dist/index.esm.js:
 
 focus-trap/dist/focus-trap.esm.js:
   (*!
-  * focus-trap 7.6.5
+  * focus-trap 7.6.4
   * @license MIT, https://github.com/focus-trap/focus-trap/blob/master/LICENSE
   *)
 */

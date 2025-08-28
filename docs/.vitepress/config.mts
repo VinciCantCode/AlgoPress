@@ -203,6 +203,7 @@ export default defineConfig({
           { text: '211. Design Add and Search Words Data Structure', link: '/Design-Data-Structure/211.md' },
           { text: '155. Min Stack', link: '/Design-Data-Structure/155.md' },
           { text: '146. LRU Cache', link: '/Design-Data-Structure/146.md' },
+          { text: '460. LFU Cache', link: '/Design-Data-Structure/460.md' },
         ]
       },
 
