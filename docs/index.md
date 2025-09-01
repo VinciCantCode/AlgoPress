@@ -46,6 +46,9 @@ hero:
     - theme: alt
       text: Array And String
       link: /Array-And-String/238
+    - theme: alt
+      text: Top 100
+      link: /Top-100/Hashing/1
 
     
 
