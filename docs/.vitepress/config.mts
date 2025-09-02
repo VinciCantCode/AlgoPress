@@ -228,6 +228,8 @@ export default defineConfig({
             collapsed: true,
             items: [
               { text: '1. Two Sum', link: '/Top-100/Hashing/1.md' },
+              { text: '49. Group Anagrams', link: '/Top-100/Hashing/49.md' },
+              { text: '128. Longest Consecutive Sequence', link: '/Top-100/Hashing/128.md' },
             ]
           },
           {
