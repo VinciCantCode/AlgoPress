@@ -5,3 +5,14 @@ node_modules
 .vercel # Deployed to Vercel
 .vitepress/supabase.ts # Supabase configuration
 docs/test-users.md  # Test files
+
+# Python 缓存文件
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+.venv/
+venv/
+ENV/
+env/
