@@ -238,6 +238,8 @@ export default defineConfig({
             collapsed: true,
             items: [
               { text: '283. Move Zeroes', link: '/Top-100/Two-Pointers/283.md' },
+              { text: '11. Container With Most Water', link: '/Top-100/Two-Pointers/11.md' },
+              { text: '15. 3Sum', link: '/Top-100/Two-Pointers/15.md' },
               
             ]
           },
