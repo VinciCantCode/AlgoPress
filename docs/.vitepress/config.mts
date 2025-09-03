@@ -230,12 +230,14 @@ export default defineConfig({
               { text: '1. Two Sum', link: '/Top-100/Hashing/1.md' },
               { text: '49. Group Anagrams', link: '/Top-100/Hashing/49.md' },
               { text: '128. Longest Consecutive Sequence', link: '/Top-100/Hashing/128.md' },
+              { text: '560. Subarray Sum Equals K', link: '/Top-100/Hashing/560.md' },
             ]
           },
           {
-            text: 'Sliding Window',
+            text: 'Two Pointers',
             collapsed: true,
             items: [
+              { text: '283. Move Zeroes', link: '/Top-100/Two-Pointers/283.md' },
               
             ]
           },

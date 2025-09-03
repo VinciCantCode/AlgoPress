@@ -40,15 +40,16 @@ var require_PostgrestBuilder = __commonJS({
     var PostgrestError_1 = __importDefault(require_PostgrestError());
     var PostgrestBuilder2 = class {
       constructor(builder) {
+        var _a, _b;
         this.shouldThrowOnError = false;
         this.method = builder.method;
         this.url = builder.url;
-        this.headers = builder.headers;
+        this.headers = new Headers(builder.headers);
         this.schema = builder.schema;
         this.body = builder.body;
-        this.shouldThrowOnError = builder.shouldThrowOnError;
+        this.shouldThrowOnError = (_a = builder.shouldThrowOnError) !== null && _a !== void 0 ? _a : false;
         this.signal = builder.signal;
-        this.isMaybeSingle = builder.isMaybeSingle;
+        this.isMaybeSingle = (_b = builder.isMaybeSingle) !== null && _b !== void 0 ? _b : false;
         if (builder.fetch) {
           this.fetch = builder.fetch;
         } else if (typeof fetch === "undefined") {
@@ -71,19 +72,19 @@ var require_PostgrestBuilder = __commonJS({
        * Set an HTTP header for the request.
        */
       setHeader(name, value) {
-        this.headers = Object.assign({}, this.headers);
-        this.headers[name] = value;
+        this.headers = new Headers(this.headers);
+        this.headers.set(name, value);
         return this;
       }
       then(onfulfilled, onrejected) {
         if (this.schema === void 0) {
         } else if (["GET", "HEAD"].includes(this.method)) {
-          this.headers["Accept-Profile"] = this.schema;
+          this.headers.set("Accept-Profile", this.schema);
         } else {
-          this.headers["Content-Profile"] = this.schema;
+          this.headers.set("Content-Profile", this.schema);
         }
         if (this.method !== "GET" && this.method !== "HEAD") {
-          this.headers["Content-Type"] = "application/json";
+          this.headers.set("Content-Type", "application/json");
         }
         const _fetch = this.fetch;
         let res = _fetch(this.url.toString(), {
@@ -92,7 +93,7 @@ var require_PostgrestBuilder = __commonJS({
           body: JSON.stringify(this.body),
           signal: this.signal
         }).then(async (res2) => {
-          var _a, _b, _c;
+          var _a, _b, _c, _d;
           let error = null;
           let data = null;
           let count = null;
@@ -102,16 +103,16 @@ var require_PostgrestBuilder = __commonJS({
             if (this.method !== "HEAD") {
               const body = await res2.text();
               if (body === "") {
-              } else if (this.headers["Accept"] === "text/csv") {
+              } else if (this.headers.get("Accept") === "text/csv") {
                 data = body;
-              } else if (this.headers["Accept"] && this.headers["Accept"].includes("application/vnd.pgrst.plan+text")) {
+              } else if (this.headers.get("Accept") && ((_a = this.headers.get("Accept")) === null || _a === void 0 ? void 0 : _a.includes("application/vnd.pgrst.plan+text"))) {
                 data = body;
               } else {
                 data = JSON.parse(body);
               }
             }
-            const countHeader = (_a = this.headers["Prefer"]) === null || _a === void 0 ? void 0 : _a.match(/count=(exact|planned|estimated)/);
-            const contentRange = (_b = res2.headers.get("content-range")) === null || _b === void 0 ? void 0 : _b.split("/");
+            const countHeader = (_b = this.headers.get("Prefer")) === null || _b === void 0 ? void 0 : _b.match(/count=(exact|planned|estimated)/);
+            const contentRange = (_c = res2.headers.get("content-range")) === null || _c === void 0 ? void 0 : _c.split("/");
             if (countHeader && contentRange && contentRange.length > 1) {
               count = parseInt(contentRange[1]);
             }
@@ -144,7 +145,7 @@ var require_PostgrestBuilder = __commonJS({
                 status = 200;
                 statusText = "OK";
               }
-            } catch (_d) {
+            } catch (_e) {
               if (res2.status === 404 && body === "") {
                 status = 204;
                 statusText = "No Content";
@@ -154,7 +155,7 @@ var require_PostgrestBuilder = __commonJS({
                 };
               }
             }
-            if (error && this.isMaybeSingle && ((_c = error === null || error === void 0 ? void 0 : error.details) === null || _c === void 0 ? void 0 : _c.includes("0 rows"))) {
+            if (error && this.isMaybeSingle && ((_d = error === null || error === void 0 ? void 0 : error.details) === null || _d === void 0 ? void 0 : _d.includes("0 rows"))) {
               error = null;
               status = 200;
               statusText = "OK";
@@ -261,10 +262,7 @@ var require_PostgrestTransformBuilder = __commonJS({
           return c;
         }).join("");
         this.url.searchParams.set("select", cleanedColumns);
-        if (this.headers["Prefer"]) {
-          this.headers["Prefer"] += ",";
-        }
-        this.headers["Prefer"] += "return=representation";
+        this.headers.append("Prefer", "return=representation");
         return this;
       }
       /**
@@ -344,7 +342,7 @@ var require_PostgrestTransformBuilder = __commonJS({
        * returns an error.
        */
       single() {
-        this.headers["Accept"] = "application/vnd.pgrst.object+json";
+        this.headers.set("Accept", "application/vnd.pgrst.object+json");
         return this;
       }
       /**
@@ -355,9 +353,9 @@ var require_PostgrestTransformBuilder = __commonJS({
        */
       maybeSingle() {
         if (this.method === "GET") {
-          this.headers["Accept"] = "application/json";
+          this.headers.set("Accept", "application/json");
         } else {
-          this.headers["Accept"] = "application/vnd.pgrst.object+json";
+          this.headers.set("Accept", "application/vnd.pgrst.object+json");
         }
         this.isMaybeSingle = true;
         return this;
@@ -366,14 +364,14 @@ var require_PostgrestTransformBuilder = __commonJS({
        * Return `data` as a string in CSV format.
        */
       csv() {
-        this.headers["Accept"] = "text/csv";
+        this.headers.set("Accept", "text/csv");
         return this;
       }
       /**
        * Return `data` as an object in [GeoJSON](https://geojson.org) format.
        */
       geojson() {
-        this.headers["Accept"] = "application/geo+json";
+        this.headers.set("Accept", "application/geo+json");
         return this;
       }
       /**
@@ -410,12 +408,13 @@ var require_PostgrestTransformBuilder = __commonJS({
           buffers ? "buffers" : null,
           wal ? "wal" : null
         ].filter(Boolean).join("|");
-        const forMediatype = (_a = this.headers["Accept"]) !== null && _a !== void 0 ? _a : "application/json";
-        this.headers["Accept"] = `application/vnd.pgrst.plan+${format}; for="${forMediatype}"; options=${options};`;
-        if (format === "json")
+        const forMediatype = (_a = this.headers.get("Accept")) !== null && _a !== void 0 ? _a : "application/json";
+        this.headers.set("Accept", `application/vnd.pgrst.plan+${format}; for="${forMediatype}"; options=${options};`);
+        if (format === "json") {
           return this;
-        else
+        } else {
           return this;
+        }
       }
       /**
        * Rollback the query.
@@ -423,12 +422,7 @@ var require_PostgrestTransformBuilder = __commonJS({
        * `data` will still be returned, but the query is not committed.
        */
       rollback() {
-        var _a;
-        if (((_a = this.headers["Prefer"]) !== null && _a !== void 0 ? _a : "").trim().length > 0) {
-          this.headers["Prefer"] += ",tx=rollback";
-        } else {
-          this.headers["Prefer"] = "tx=rollback";
-        }
+        this.headers.append("Prefer", "tx=rollback");
         return this;
       }
       /**
@@ -438,6 +432,17 @@ var require_PostgrestTransformBuilder = __commonJS({
        * @deprecated Use overrideTypes<yourType, { merge: false }>() method at the end of your call chain instead
        */
       returns() {
+        return this;
+      }
+      /**
+       * Set the maximum number of rows that can be affected by the query.
+       * Only available in PostgREST v13+ and only works with PATCH and DELETE methods.
+       *
+       * @param value - The maximum number of rows that can be affected
+       */
+      maxAffected(value) {
+        this.headers.append("Prefer", "handling=strict");
+        this.headers.append("Prefer", `max-affected=${value}`);
         return this;
       }
     };
@@ -823,7 +828,7 @@ var require_PostgrestQueryBuilder = __commonJS({
     var PostgrestQueryBuilder2 = class {
       constructor(url, { headers = {}, schema, fetch: fetch2 }) {
         this.url = url;
-        this.headers = headers;
+        this.headers = new Headers(headers);
         this.schema = schema;
         this.fetch = fetch2;
       }
@@ -862,15 +867,14 @@ var require_PostgrestQueryBuilder = __commonJS({
         }).join("");
         this.url.searchParams.set("select", cleanedColumns);
         if (count) {
-          this.headers["Prefer"] = `count=${count}`;
+          this.headers.append("Prefer", `count=${count}`);
         }
         return new PostgrestFilterBuilder_1.default({
           method,
           url: this.url,
           headers: this.headers,
           schema: this.schema,
-          fetch: this.fetch,
-          allowEmpty: false
+          fetch: this.fetch
         });
       }
       /**
@@ -900,18 +904,14 @@ var require_PostgrestQueryBuilder = __commonJS({
        * inserts.
        */
       insert(values, { count, defaultToNull = true } = {}) {
+        var _a;
         const method = "POST";
-        const prefersHeaders = [];
-        if (this.headers["Prefer"]) {
-          prefersHeaders.push(this.headers["Prefer"]);
-        }
         if (count) {
-          prefersHeaders.push(`count=${count}`);
+          this.headers.append("Prefer", `count=${count}`);
         }
         if (!defaultToNull) {
-          prefersHeaders.push("missing=default");
+          this.headers.append("Prefer", `missing=default`);
         }
-        this.headers["Prefer"] = prefersHeaders.join(",");
         if (Array.isArray(values)) {
           const columns = values.reduce((acc, x) => acc.concat(Object.keys(x)), []);
           if (columns.length > 0) {
@@ -925,8 +925,7 @@ var require_PostgrestQueryBuilder = __commonJS({
           headers: this.headers,
           schema: this.schema,
           body: values,
-          fetch: this.fetch,
-          allowEmpty: false
+          fetch: (_a = this.fetch) !== null && _a !== void 0 ? _a : fetch
         });
       }
       /**
@@ -968,20 +967,17 @@ var require_PostgrestQueryBuilder = __commonJS({
        * `ignoreDuplicates: false`. This also only applies when doing bulk upserts.
        */
       upsert(values, { onConflict, ignoreDuplicates = false, count, defaultToNull = true } = {}) {
+        var _a;
         const method = "POST";
-        const prefersHeaders = [`resolution=${ignoreDuplicates ? "ignore" : "merge"}-duplicates`];
+        this.headers.append("Prefer", `resolution=${ignoreDuplicates ? "ignore" : "merge"}-duplicates`);
         if (onConflict !== void 0)
           this.url.searchParams.set("on_conflict", onConflict);
-        if (this.headers["Prefer"]) {
-          prefersHeaders.push(this.headers["Prefer"]);
-        }
         if (count) {
-          prefersHeaders.push(`count=${count}`);
+          this.headers.append("Prefer", `count=${count}`);
         }
         if (!defaultToNull) {
-          prefersHeaders.push("missing=default");
+          this.headers.append("Prefer", "missing=default");
         }
-        this.headers["Prefer"] = prefersHeaders.join(",");
         if (Array.isArray(values)) {
           const columns = values.reduce((acc, x) => acc.concat(Object.keys(x)), []);
           if (columns.length > 0) {
@@ -995,8 +991,7 @@ var require_PostgrestQueryBuilder = __commonJS({
           headers: this.headers,
           schema: this.schema,
           body: values,
-          fetch: this.fetch,
-          allowEmpty: false
+          fetch: (_a = this.fetch) !== null && _a !== void 0 ? _a : fetch
         });
       }
       /**
@@ -1021,23 +1016,18 @@ var require_PostgrestQueryBuilder = __commonJS({
        * numbers.
        */
       update(values, { count } = {}) {
+        var _a;
         const method = "PATCH";
-        const prefersHeaders = [];
-        if (this.headers["Prefer"]) {
-          prefersHeaders.push(this.headers["Prefer"]);
-        }
         if (count) {
-          prefersHeaders.push(`count=${count}`);
+          this.headers.append("Prefer", `count=${count}`);
         }
-        this.headers["Prefer"] = prefersHeaders.join(",");
         return new PostgrestFilterBuilder_1.default({
           method,
           url: this.url,
           headers: this.headers,
           schema: this.schema,
           body: values,
-          fetch: this.fetch,
-          allowEmpty: false
+          fetch: (_a = this.fetch) !== null && _a !== void 0 ? _a : fetch
         });
       }
       /**
@@ -1060,47 +1050,21 @@ var require_PostgrestQueryBuilder = __commonJS({
        * numbers.
        */
       delete({ count } = {}) {
+        var _a;
         const method = "DELETE";
-        const prefersHeaders = [];
         if (count) {
-          prefersHeaders.push(`count=${count}`);
+          this.headers.append("Prefer", `count=${count}`);
         }
-        if (this.headers["Prefer"]) {
-          prefersHeaders.unshift(this.headers["Prefer"]);
-        }
-        this.headers["Prefer"] = prefersHeaders.join(",");
         return new PostgrestFilterBuilder_1.default({
           method,
           url: this.url,
           headers: this.headers,
           schema: this.schema,
-          fetch: this.fetch,
-          allowEmpty: false
+          fetch: (_a = this.fetch) !== null && _a !== void 0 ? _a : fetch
         });
       }
     };
     exports.default = PostgrestQueryBuilder2;
-  }
-});
-
-// node_modules/@supabase/postgrest-js/dist/cjs/version.js
-var require_version = __commonJS({
-  "node_modules/@supabase/postgrest-js/dist/cjs/version.js"(exports) {
-    "use strict";
-    Object.defineProperty(exports, "__esModule", { value: true });
-    exports.version = void 0;
-    exports.version = "0.0.0-automated";
-  }
-});
-
-// node_modules/@supabase/postgrest-js/dist/cjs/constants.js
-var require_constants = __commonJS({
-  "node_modules/@supabase/postgrest-js/dist/cjs/constants.js"(exports) {
-    "use strict";
-    Object.defineProperty(exports, "__esModule", { value: true });
-    exports.DEFAULT_HEADERS = void 0;
-    var version_1 = require_version();
-    exports.DEFAULT_HEADERS = { "X-Client-Info": `postgrest-js/${version_1.version}` };
   }
 });
 
@@ -1114,7 +1078,6 @@ var require_PostgrestClient = __commonJS({
     Object.defineProperty(exports, "__esModule", { value: true });
     var PostgrestQueryBuilder_1 = __importDefault(require_PostgrestQueryBuilder());
     var PostgrestFilterBuilder_1 = __importDefault(require_PostgrestFilterBuilder());
-    var constants_1 = require_constants();
     var PostgrestClient2 = class _PostgrestClient {
       // TODO: Add back shouldThrowOnError once we figure out the typings
       /**
@@ -1128,7 +1091,7 @@ var require_PostgrestClient = __commonJS({
        */
       constructor(url, { headers = {}, schema, fetch: fetch2 } = {}) {
         this.url = url;
-        this.headers = Object.assign(Object.assign({}, constants_1.DEFAULT_HEADERS), headers);
+        this.headers = new Headers(headers);
         this.schemaName = schema;
         this.fetch = fetch2;
       }
@@ -1140,7 +1103,7 @@ var require_PostgrestClient = __commonJS({
       from(relation) {
         const url = new URL(`${this.url}/${relation}`);
         return new PostgrestQueryBuilder_1.default(url, {
-          headers: Object.assign({}, this.headers),
+          headers: new Headers(this.headers),
           schema: this.schemaName,
           fetch: this.fetch
         });
@@ -1183,6 +1146,7 @@ var require_PostgrestClient = __commonJS({
        * numbers.
        */
       rpc(fn, args = {}, { head: head2 = false, get: get2 = false, count } = {}) {
+        var _a;
         let method;
         const url = new URL(`${this.url}/rpc/${fn}`);
         let body;
@@ -1195,9 +1159,9 @@ var require_PostgrestClient = __commonJS({
           method = "POST";
           body = args;
         }
-        const headers = Object.assign({}, this.headers);
+        const headers = new Headers(this.headers);
         if (count) {
-          headers["Prefer"] = `count=${count}`;
+          headers.set("Prefer", `count=${count}`);
         }
         return new PostgrestFilterBuilder_1.default({
           method,
@@ -1205,8 +1169,7 @@ var require_PostgrestClient = __commonJS({
           headers,
           schema: this.schemaName,
           body,
-          fetch: this.fetch,
-          allowEmpty: false
+          fetch: (_a = this.fetch) !== null && _a !== void 0 ? _a : fetch
         });
       }
     };
@@ -1242,18 +1205,6 @@ var require_cjs = __commonJS({
       PostgrestTransformBuilder: PostgrestTransformBuilder_1.default,
       PostgrestBuilder: PostgrestBuilder_1.default,
       PostgrestError: PostgrestError_1.default
-    };
-  }
-});
-
-// node_modules/ws/browser.js
-var require_browser = __commonJS({
-  "node_modules/ws/browser.js"(exports, module) {
-    "use strict";
-    module.exports = function() {
-      throw new Error(
-        "ws does not work in the browser. Browser clients must use the native WebSocket object"
-      );
     };
   }
 });
@@ -1370,8 +1321,10 @@ var FunctionsClient = class {
         if (!region) {
           region = this.region;
         }
+        const url = new URL(`${this.url}/${functionName}`);
         if (region && region !== "any") {
           _headers["x-region"] = region;
+          url.searchParams.set("forceFunctionRegion", region);
         }
         let body;
         if (functionArgs && (headers && !Object.prototype.hasOwnProperty.call(headers, "Content-Type") || !headers)) {
@@ -1388,7 +1341,7 @@ var FunctionsClient = class {
             body = JSON.stringify(functionArgs);
           }
         }
-        const response = yield this.fetch(`${this.url}/${functionName}`, {
+        const response = yield this.fetch(url.toString(), {
           method: method || "POST",
           // headers priority is (high to low):
           // 1. invoke-level headers
@@ -1419,9 +1372,13 @@ var FunctionsClient = class {
         } else {
           data = yield response.text();
         }
-        return { data, error: null };
+        return { data, error: null, response };
       } catch (error) {
-        return { data: null, error };
+        return {
+          data: null,
+          error,
+          response: error instanceof FunctionsHttpError || error instanceof FunctionsRelayError ? error.context : void 0
+        };
       }
     });
   }
@@ -1438,23 +1395,94 @@ var {
   PostgrestError
 } = import_cjs.default;
 
-// node_modules/@supabase/realtime-js/dist/module/WebSocket.js
-var WebSocketImpl;
-if (typeof window === "undefined") {
-  WebSocketImpl = require_browser();
-} else {
-  WebSocketImpl = window.WebSocket;
-}
-var WebSocket_default = WebSocketImpl;
+// node_modules/@supabase/realtime-js/dist/module/lib/websocket-factory.js
+var WebSocketFactory = class {
+  static detectEnvironment() {
+    var _a;
+    if (typeof WebSocket !== "undefined") {
+      return { type: "native", constructor: WebSocket };
+    }
+    if (typeof globalThis !== "undefined" && typeof globalThis.WebSocket !== "undefined") {
+      return { type: "native", constructor: globalThis.WebSocket };
+    }
+    if (typeof global !== "undefined" && typeof global.WebSocket !== "undefined") {
+      return { type: "native", constructor: global.WebSocket };
+    }
+    if (typeof globalThis !== "undefined" && typeof globalThis.WebSocketPair !== "undefined" && typeof globalThis.WebSocket === "undefined") {
+      return {
+        type: "cloudflare",
+        error: "Cloudflare Workers detected. WebSocket clients are not supported in Cloudflare Workers.",
+        workaround: "Use Cloudflare Workers WebSocket API for server-side WebSocket handling, or deploy to a different runtime."
+      };
+    }
+    if (typeof globalThis !== "undefined" && globalThis.EdgeRuntime || typeof navigator !== "undefined" && ((_a = navigator.userAgent) === null || _a === void 0 ? void 0 : _a.includes("Vercel-Edge"))) {
+      return {
+        type: "unsupported",
+        error: "Edge runtime detected (Vercel Edge/Netlify Edge). WebSockets are not supported in edge functions.",
+        workaround: "Use serverless functions or a different deployment target for WebSocket functionality."
+      };
+    }
+    if (typeof process !== "undefined" && process.versions && process.versions.node) {
+      const nodeVersion = parseInt(process.versions.node.split(".")[0]);
+      if (nodeVersion >= 22) {
+        if (typeof globalThis.WebSocket !== "undefined") {
+          return { type: "native", constructor: globalThis.WebSocket };
+        }
+        return {
+          type: "unsupported",
+          error: `Node.js ${nodeVersion} detected but native WebSocket not found.`,
+          workaround: "Provide a WebSocket implementation via the transport option."
+        };
+      }
+      return {
+        type: "unsupported",
+        error: `Node.js ${nodeVersion} detected without native WebSocket support.`,
+        workaround: 'For Node.js < 22, install "ws" package and provide it via the transport option:\nimport ws from "ws"\nnew RealtimeClient(url, { transport: ws })'
+      };
+    }
+    return {
+      type: "unsupported",
+      error: "Unknown JavaScript runtime without WebSocket support.",
+      workaround: "Ensure you're running in a supported environment (browser, Node.js, Deno) or provide a custom WebSocket implementation."
+    };
+  }
+  static getWebSocketConstructor() {
+    const env = this.detectEnvironment();
+    if (env.constructor) {
+      return env.constructor;
+    }
+    let errorMessage = env.error || "WebSocket not supported in this environment.";
+    if (env.workaround) {
+      errorMessage += `
+
+Suggested solution: ${env.workaround}`;
+    }
+    throw new Error(errorMessage);
+  }
+  static createWebSocket(url, protocols) {
+    const WS = this.getWebSocketConstructor();
+    return new WS(url, protocols);
+  }
+  static isWebSocketSupported() {
+    try {
+      const env = this.detectEnvironment();
+      return env.type === "native" || env.type === "ws";
+    } catch (_a) {
+      return false;
+    }
+  }
+};
+var websocket_factory_default = WebSocketFactory;
 
 // node_modules/@supabase/realtime-js/dist/module/lib/version.js
-var version = "2.11.10";
+var version = "2.15.1";
 
 // node_modules/@supabase/realtime-js/dist/module/lib/constants.js
-var DEFAULT_HEADERS = { "X-Client-Info": `realtime-js/${version}` };
+var DEFAULT_VERSION = `realtime-js/${version}`;
 var VSN = "1.0.0";
 var DEFAULT_TIMEOUT = 1e4;
 var WS_CLOSE_NORMAL = 1e3;
+var MAX_PUSH_BUFFER_SIZE = 100;
 var SOCKET_STATES;
 (function(SOCKET_STATES2) {
   SOCKET_STATES2[SOCKET_STATES2["connecting"] = 0] = "connecting";
@@ -1536,6 +1564,7 @@ var Timer = class {
   reset() {
     this.tries = 0;
     clearTimeout(this.timer);
+    this.timer = void 0;
   }
   // Cancels any previous scheduleTimeout and schedules callback
   scheduleTimeout() {
@@ -1693,7 +1722,7 @@ var httpEndpointURL = (socketUrl) => {
   let url = socketUrl;
   url = url.replace(/^ws/i, "http");
   url = url.replace(/(\/socket\/websocket|\/socket|\/websocket)\/?$/i, "");
-  return url.replace(/\/+$/, "");
+  return url.replace(/\/+$/, "") + "/api/broadcast";
 };
 
 // node_modules/@supabase/realtime-js/dist/module/lib/push.js
@@ -1815,6 +1844,7 @@ var RealtimePresence = class _RealtimePresence {
     this.state = {};
     this.pendingDiffs = [];
     this.joinRef = null;
+    this.enabled = false;
     this.caller = {
       onJoin: () => {
       },
@@ -2053,7 +2083,7 @@ var RealtimeChannel = class _RealtimeChannel {
     this.subTopic = topic.replace(/^realtime:/i, "");
     this.params.config = Object.assign({
       broadcast: { ack: false, self: false },
-      presence: { key: "" },
+      presence: { key: "", enabled: false },
       private: false
     }, params.config);
     this.timeout = this.socket.timeout;
@@ -2087,11 +2117,19 @@ var RealtimeChannel = class _RealtimeChannel {
       this.state = CHANNEL_STATES.errored;
       this.rejoinTimer.scheduleTimeout();
     });
+    this.joinPush.receive("error", (reason) => {
+      if (this._isLeaving() || this._isClosed()) {
+        return;
+      }
+      this.socket.log("channel", `error ${this.topic}`, reason);
+      this.state = CHANNEL_STATES.errored;
+      this.rejoinTimer.scheduleTimeout();
+    });
     this._on(CHANNEL_EVENTS.reply, {}, (payload, ref) => {
       this._trigger(this._replyEventName(ref), payload);
     });
     this.presence = new RealtimePresence(this);
-    this.broadcastEndpointURL = httpEndpointURL(this.socket.endPoint) + "/api/broadcast";
+    this.broadcastEndpointURL = httpEndpointURL(this.socket.endPoint);
     this.private = this.params.config.private || false;
   }
   /** Subscribe registers your client with the server */
@@ -2100,29 +2138,29 @@ var RealtimeChannel = class _RealtimeChannel {
     if (!this.socket.isConnected()) {
       this.socket.connect();
     }
-    if (this.joinedOnce) {
-      throw `tried to subscribe multiple times. 'subscribe' can only be called a single time per channel instance`;
-    } else {
+    if (this.state == CHANNEL_STATES.closed) {
       const { config: { broadcast, presence, private: isPrivate } } = this.params;
-      this._onError((e) => callback === null || callback === void 0 ? void 0 : callback(REALTIME_SUBSCRIBE_STATES.CHANNEL_ERROR, e));
-      this._onClose(() => callback === null || callback === void 0 ? void 0 : callback(REALTIME_SUBSCRIBE_STATES.CLOSED));
+      const postgres_changes = (_b = (_a = this.bindings.postgres_changes) === null || _a === void 0 ? void 0 : _a.map((r) => r.filter)) !== null && _b !== void 0 ? _b : [];
+      const presence_enabled = !!this.bindings[REALTIME_LISTEN_TYPES.PRESENCE] && this.bindings[REALTIME_LISTEN_TYPES.PRESENCE].length > 0;
       const accessTokenPayload = {};
       const config = {
         broadcast,
-        presence,
-        postgres_changes: (_b = (_a = this.bindings.postgres_changes) === null || _a === void 0 ? void 0 : _a.map((r) => r.filter)) !== null && _b !== void 0 ? _b : [],
+        presence: Object.assign(Object.assign({}, presence), { enabled: presence_enabled }),
+        postgres_changes,
         private: isPrivate
       };
       if (this.socket.accessTokenValue) {
         accessTokenPayload.access_token = this.socket.accessTokenValue;
       }
+      this._onError((e) => callback === null || callback === void 0 ? void 0 : callback(REALTIME_SUBSCRIBE_STATES.CHANNEL_ERROR, e));
+      this._onClose(() => callback === null || callback === void 0 ? void 0 : callback(REALTIME_SUBSCRIBE_STATES.CLOSED));
       this.updateJoinPayload(Object.assign({ config }, accessTokenPayload));
       this.joinedOnce = true;
       this._rejoin(timeout);
-      this.joinPush.receive("ok", async ({ postgres_changes }) => {
+      this.joinPush.receive("ok", async ({ postgres_changes: postgres_changes2 }) => {
         var _a2;
         this.socket.setAuth();
-        if (postgres_changes === void 0) {
+        if (postgres_changes2 === void 0) {
           callback === null || callback === void 0 ? void 0 : callback(REALTIME_SUBSCRIBE_STATES.SUBSCRIBED);
           return;
         } else {
@@ -2132,7 +2170,7 @@ var RealtimeChannel = class _RealtimeChannel {
           for (let i = 0; i < bindingsLen; i++) {
             const clientPostgresBinding = clientPostgresBindings[i];
             const { filter: { event, schema, table, filter } } = clientPostgresBinding;
-            const serverPostgresFilter = postgres_changes && postgres_changes[i];
+            const serverPostgresFilter = postgres_changes2 && postgres_changes2[i];
             if (serverPostgresFilter && serverPostgresFilter.event === event && serverPostgresFilter.schema === schema && serverPostgresFilter.table === table && serverPostgresFilter.filter === filter) {
               newPostgresBindings.push(Object.assign(Object.assign({}, clientPostgresBinding), { id: serverPostgresFilter.id }));
             } else {
@@ -2174,6 +2212,10 @@ var RealtimeChannel = class _RealtimeChannel {
     }, opts);
   }
   on(type, filter, callback) {
+    if (this.state === CHANNEL_STATES.joined && type === REALTIME_LISTEN_TYPES.PRESENCE) {
+      this.socket.log("channel", `resubscribe to ${this.topic} due to change in presence callbacks on joined channel`);
+      this.unsubscribe().then(() => this.subscribe());
+    }
     return this._on(type, filter, callback);
   }
   /**
@@ -2251,8 +2293,9 @@ var RealtimeChannel = class _RealtimeChannel {
       this._trigger(CHANNEL_EVENTS.close, "leave", this._joinRef());
     };
     this.joinPush.destroy();
+    let leavePush = null;
     return new Promise((resolve) => {
-      const leavePush = new Push(this, CHANNEL_EVENTS.leave, {}, timeout);
+      leavePush = new Push(this, CHANNEL_EVENTS.leave, {}, timeout);
       leavePush.receive("ok", () => {
         onClose();
         resolve("ok");
@@ -2266,6 +2309,8 @@ var RealtimeChannel = class _RealtimeChannel {
       if (!this._canPush()) {
         leavePush.trigger("ok", {});
       }
+    }).finally(() => {
+      leavePush === null || leavePush === void 0 ? void 0 : leavePush.destroy();
     });
   }
   /**
@@ -2275,8 +2320,11 @@ var RealtimeChannel = class _RealtimeChannel {
    */
   teardown() {
     this.pushBuffer.forEach((push) => push.destroy());
-    this.rejoinTimer && clearTimeout(this.rejoinTimer.timer);
+    this.pushBuffer = [];
+    this.rejoinTimer.reset();
     this.joinPush.destroy();
+    this.state = CHANNEL_STATES.closed;
+    this.bindings = {};
   }
   /** @internal */
   async _fetchWithTimeout(url, options, timeout) {
@@ -2295,10 +2343,21 @@ var RealtimeChannel = class _RealtimeChannel {
     if (this._canPush()) {
       pushEvent.send();
     } else {
-      pushEvent.startTimeout();
-      this.pushBuffer.push(pushEvent);
+      this._addToPushBuffer(pushEvent);
     }
     return pushEvent;
+  }
+  /** @internal */
+  _addToPushBuffer(pushEvent) {
+    pushEvent.startTimeout();
+    this.pushBuffer.push(pushEvent);
+    if (this.pushBuffer.length > MAX_PUSH_BUFFER_SIZE) {
+      const removedPush = this.pushBuffer.shift();
+      if (removedPush) {
+        removedPush.destroy();
+        this.socket.log("channel", `discarded push due to buffer overflow: ${removedPush.event}`, removedPush.payload);
+      }
+    }
   }
   /**
    * Overridable message hook
@@ -2409,10 +2468,12 @@ var RealtimeChannel = class _RealtimeChannel {
   /** @internal */
   _off(type, filter) {
     const typeLower = type.toLocaleLowerCase();
-    this.bindings[typeLower] = this.bindings[typeLower].filter((bind) => {
-      var _a;
-      return !(((_a = bind.type) === null || _a === void 0 ? void 0 : _a.toLocaleLowerCase()) === typeLower && _RealtimeChannel.isEqual(bind.filter, filter));
-    });
+    if (this.bindings[typeLower]) {
+      this.bindings[typeLower] = this.bindings[typeLower].filter((bind) => {
+        var _a;
+        return !(((_a = bind.type) === null || _a === void 0 ? void 0 : _a.toLocaleLowerCase()) === typeLower && _RealtimeChannel.isEqual(bind.filter, filter));
+      });
+    }
     return this;
   }
   /** @internal */
@@ -2486,6 +2547,13 @@ var RealtimeChannel = class _RealtimeChannel {
 // node_modules/@supabase/realtime-js/dist/module/RealtimeClient.js
 var noop2 = () => {
 };
+var CONNECTION_TIMEOUTS = {
+  HEARTBEAT_INTERVAL: 25e3,
+  RECONNECT_DELAY: 10,
+  HEARTBEAT_TIMEOUT_FALLBACK: 100
+};
+var RECONNECT_INTERVALS = [1e3, 2e3, 5e3, 1e4];
+var DEFAULT_RECONNECT_FALLBACK = 1e4;
 var WORKER_SCRIPT = `
   addEventListener("message", (e) => {
     if (e.data.event === "start") {
@@ -2501,7 +2569,7 @@ var RealtimeClient = class {
    * @param options.transport The Websocket Transport, for example WebSocket. This can be a custom implementation
    * @param options.timeout The default timeout in milliseconds to trigger push timeouts.
    * @param options.params The optional params to pass when connecting.
-   * @param options.headers The optional headers to pass when connecting.
+   * @param options.headers Deprecated: headers cannot be set on websocket connections and this option will be removed in the future.
    * @param options.heartbeatIntervalMs The millisec interval to send a heartbeat message.
    * @param options.logger The optional function for specialized logging, ie: logger: (kind, msg, data) => { console.log(`${kind}: ${msg}`, data) }
    * @param options.logLevel Sets the log level for Realtime
@@ -2518,14 +2586,16 @@ var RealtimeClient = class {
     this.channels = new Array();
     this.endPoint = "";
     this.httpEndpoint = "";
-    this.headers = DEFAULT_HEADERS;
+    this.headers = {};
     this.params = {};
     this.timeout = DEFAULT_TIMEOUT;
-    this.heartbeatIntervalMs = 25e3;
+    this.transport = null;
+    this.heartbeatIntervalMs = CONNECTION_TIMEOUTS.HEARTBEAT_INTERVAL;
     this.heartbeatTimer = void 0;
     this.pendingHeartbeatRef = null;
     this.heartbeatCallback = noop2;
     this.ref = 0;
+    this.reconnectTimer = null;
     this.logger = noop2;
     this.conn = null;
     this.sendBuffer = [];
@@ -2537,91 +2607,69 @@ var RealtimeClient = class {
       message: []
     };
     this.accessToken = null;
+    this._connectionState = "disconnected";
+    this._wasManualDisconnect = false;
+    this._authPromise = null;
     this._resolveFetch = (customFetch) => {
       let _fetch;
       if (customFetch) {
         _fetch = customFetch;
       } else if (typeof fetch === "undefined") {
-        _fetch = (...args) => import("./browser-4LLAETQC.js").then(({ default: fetch2 }) => fetch2(...args));
+        _fetch = (...args) => import("./browser-4LLAETQC.js").then(({ default: fetch2 }) => fetch2(...args)).catch((error) => {
+          throw new Error(`Failed to load @supabase/node-fetch: ${error.message}. This is required for HTTP requests in Node.js environments without native fetch.`);
+        });
       } else {
         _fetch = fetch;
       }
       return (...args) => _fetch(...args);
     };
+    if (!((_a = options === null || options === void 0 ? void 0 : options.params) === null || _a === void 0 ? void 0 : _a.apikey)) {
+      throw new Error("API key is required to connect to Realtime");
+    }
+    this.apiKey = options.params.apikey;
     this.endPoint = `${endPoint}/${TRANSPORTS.websocket}`;
     this.httpEndpoint = httpEndpointURL(endPoint);
-    if (options === null || options === void 0 ? void 0 : options.transport) {
-      this.transport = options.transport;
-    } else {
-      this.transport = null;
-    }
-    if (options === null || options === void 0 ? void 0 : options.params)
-      this.params = options.params;
-    if (options === null || options === void 0 ? void 0 : options.headers)
-      this.headers = Object.assign(Object.assign({}, this.headers), options.headers);
-    if (options === null || options === void 0 ? void 0 : options.timeout)
-      this.timeout = options.timeout;
-    if (options === null || options === void 0 ? void 0 : options.logger)
-      this.logger = options.logger;
-    if ((options === null || options === void 0 ? void 0 : options.logLevel) || (options === null || options === void 0 ? void 0 : options.log_level)) {
-      this.logLevel = options.logLevel || options.log_level;
-      this.params = Object.assign(Object.assign({}, this.params), { log_level: this.logLevel });
-    }
-    if (options === null || options === void 0 ? void 0 : options.heartbeatIntervalMs)
-      this.heartbeatIntervalMs = options.heartbeatIntervalMs;
-    const accessTokenValue = (_a = options === null || options === void 0 ? void 0 : options.params) === null || _a === void 0 ? void 0 : _a.apikey;
-    if (accessTokenValue) {
-      this.accessTokenValue = accessTokenValue;
-      this.apiKey = accessTokenValue;
-    }
-    this.reconnectAfterMs = (options === null || options === void 0 ? void 0 : options.reconnectAfterMs) ? options.reconnectAfterMs : (tries) => {
-      return [1e3, 2e3, 5e3, 1e4][tries - 1] || 1e4;
-    };
-    this.encode = (options === null || options === void 0 ? void 0 : options.encode) ? options.encode : (payload, callback) => {
-      return callback(JSON.stringify(payload));
-    };
-    this.decode = (options === null || options === void 0 ? void 0 : options.decode) ? options.decode : this.serializer.decode.bind(this.serializer);
-    this.reconnectTimer = new Timer(async () => {
-      this.disconnect();
-      this.connect();
-    }, this.reconnectAfterMs);
+    this._initializeOptions(options);
+    this._setupReconnectionTimer();
     this.fetch = this._resolveFetch(options === null || options === void 0 ? void 0 : options.fetch);
-    if (options === null || options === void 0 ? void 0 : options.worker) {
-      if (typeof window !== "undefined" && !window.Worker) {
-        throw new Error("Web Worker is not supported");
-      }
-      this.worker = (options === null || options === void 0 ? void 0 : options.worker) || false;
-      this.workerUrl = options === null || options === void 0 ? void 0 : options.workerUrl;
-    }
-    this.accessToken = (options === null || options === void 0 ? void 0 : options.accessToken) || null;
   }
   /**
    * Connects the socket, unless already connected.
    */
   connect() {
-    if (this.conn) {
+    if (this.isConnecting() || this.isDisconnecting() || this.conn !== null && this.isConnected()) {
       return;
     }
-    if (!this.transport) {
-      this.transport = WebSocket_default;
-    }
+    this._setConnectionState("connecting");
+    this._setAuthSafely("connect");
     if (this.transport) {
-      const isBrowser2 = typeof window !== "undefined" && this.transport === window.WebSocket;
-      if (isBrowser2) {
-        this.conn = new this.transport(this.endpointURL());
-      } else {
-        this.conn = new this.transport(this.endpointURL(), void 0, {
-          headers: this.headers
-        });
+      this.conn = new this.transport(this.endpointURL());
+    } else {
+      try {
+        this.conn = websocket_factory_default.createWebSocket(this.endpointURL());
+      } catch (error) {
+        this._setConnectionState("disconnected");
+        const errorMessage = error.message;
+        if (errorMessage.includes("Node.js")) {
+          throw new Error(`${errorMessage}
+
+To use Realtime in Node.js, you need to provide a WebSocket implementation:
+
+Option 1: Use Node.js 22+ which has native WebSocket support
+Option 2: Install and provide the "ws" package:
+
+  npm install ws
+
+  import ws from "ws"
+  const client = new RealtimeClient(url, {
+    ...options,
+    transport: ws
+  })`);
+        }
+        throw new Error(`WebSocket not available: ${errorMessage}`);
       }
-      this.setupConnection();
-      return;
     }
-    this.conn = new WSWebSocketDummy(this.endpointURL(), void 0, {
-      close: () => {
-        this.conn = null;
-      }
-    });
+    this._setupConnectionHandlers();
   }
   /**
    * Returns the URL of the websocket.
@@ -2637,18 +2685,26 @@ var RealtimeClient = class {
    * @param reason A custom reason for the disconnect.
    */
   disconnect(code, reason) {
+    if (this.isDisconnecting()) {
+      return;
+    }
+    this._setConnectionState("disconnecting", true);
     if (this.conn) {
-      this.conn.onclose = function() {
+      const fallbackTimer = setTimeout(() => {
+        this._setConnectionState("disconnected");
+      }, 100);
+      this.conn.onclose = () => {
+        clearTimeout(fallbackTimer);
+        this._setConnectionState("disconnected");
       };
       if (code) {
         this.conn.close(code, reason !== null && reason !== void 0 ? reason : "");
       } else {
         this.conn.close();
       }
-      this.conn = null;
-      this.heartbeatTimer && clearInterval(this.heartbeatTimer);
-      this.reconnectTimer.reset();
-      this.channels.forEach((channel) => channel.teardown());
+      this._teardownConnection();
+    } else {
+      this._setConnectionState("disconnected");
     }
   }
   /**
@@ -2663,7 +2719,6 @@ var RealtimeClient = class {
    */
   async removeChannel(channel) {
     const status = await channel.unsubscribe();
-    this.channels = this.channels.filter((c) => c._joinRef !== channel._joinRef);
     if (this.channels.length === 0) {
       this.disconnect();
     }
@@ -2707,6 +2762,18 @@ var RealtimeClient = class {
   isConnected() {
     return this.connectionState() === CONNECTION_STATE.Open;
   }
+  /**
+   * Returns `true` if the connection is currently connecting.
+   */
+  isConnecting() {
+    return this._connectionState === "connecting";
+  }
+  /**
+   * Returns `true` if the connection is currently disconnecting.
+   */
+  isDisconnecting() {
+    return this._connectionState === "disconnecting";
+  }
   channel(topic, params = { config: {} }) {
     const realtimeTopic = `realtime:${topic}`;
     const exists = this.getChannels().find((c) => c.topic === realtimeTopic);
@@ -2748,20 +2815,11 @@ var RealtimeClient = class {
    * @param token A JWT string to override the token set on the client.
    */
   async setAuth(token = null) {
-    let tokenToSend = token || this.accessToken && await this.accessToken() || this.accessTokenValue;
-    if (this.accessTokenValue != tokenToSend) {
-      this.accessTokenValue = tokenToSend;
-      this.channels.forEach((channel) => {
-        tokenToSend && channel.updateJoinPayload({
-          access_token: tokenToSend,
-          version: this.headers && this.headers["X-Client-Info"]
-        });
-        if (channel.joinedOnce && channel._isJoined()) {
-          channel._push(CHANNEL_EVENTS.access_token, {
-            access_token: tokenToSend
-          });
-        }
-      });
+    this._authPromise = this._performAuth(token);
+    try {
+      await this._authPromise;
+    } finally {
+      this._authPromise = null;
     }
   }
   /**
@@ -2777,7 +2835,14 @@ var RealtimeClient = class {
       this.pendingHeartbeatRef = null;
       this.log("transport", "heartbeat timeout. Attempting to re-establish connection");
       this.heartbeatCallback("timeout");
-      (_a = this.conn) === null || _a === void 0 ? void 0 : _a.close(WS_CLOSE_NORMAL, "hearbeat timeout");
+      this._wasManualDisconnect = false;
+      (_a = this.conn) === null || _a === void 0 ? void 0 : _a.close(WS_CLOSE_NORMAL, "heartbeat timeout");
+      setTimeout(() => {
+        var _a2;
+        if (!this.isConnected()) {
+          (_a2 = this.reconnectTimer) === null || _a2 === void 0 ? void 0 : _a2.scheduleTimeout();
+        }
+      }, CONNECTION_TIMEOUTS.HEARTBEAT_TIMEOUT_FALLBACK);
       return;
     }
     this.pendingHeartbeatRef = this._makeRef();
@@ -2788,7 +2853,7 @@ var RealtimeClient = class {
       ref: this.pendingHeartbeatRef
     });
     this.heartbeatCallback("sent");
-    await this.setAuth();
+    this._setAuthSafely("heartbeat");
   }
   onHeartbeat(callback) {
     this.heartbeatCallback = callback;
@@ -2838,80 +2903,136 @@ var RealtimeClient = class {
   _remove(channel) {
     this.channels = this.channels.filter((c) => c.topic !== channel.topic);
   }
-  /**
-   * Sets up connection handlers.
-   *
-   * @internal
-   */
-  setupConnection() {
-    if (this.conn) {
-      this.conn.binaryType = "arraybuffer";
-      this.conn.onopen = () => this._onConnOpen();
-      this.conn.onerror = (error) => this._onConnError(error);
-      this.conn.onmessage = (event) => this._onConnMessage(event);
-      this.conn.onclose = (event) => this._onConnClose(event);
-    }
-  }
   /** @internal */
   _onConnMessage(rawMessage) {
     this.decode(rawMessage.data, (msg) => {
-      let { topic, event, payload, ref } = msg;
-      if (topic === "phoenix" && event === "phx_reply") {
-        this.heartbeatCallback(msg.payload.status == "ok" ? "ok" : "error");
+      if (msg.topic === "phoenix" && msg.event === "phx_reply") {
+        this.heartbeatCallback(msg.payload.status === "ok" ? "ok" : "error");
       }
-      if (ref && ref === this.pendingHeartbeatRef) {
+      if (msg.ref && msg.ref === this.pendingHeartbeatRef) {
         this.pendingHeartbeatRef = null;
       }
-      this.log("receive", `${payload.status || ""} ${topic} ${event} ${ref && "(" + ref + ")" || ""}`, payload);
-      Array.from(this.channels).filter((channel) => channel._isMember(topic)).forEach((channel) => channel._trigger(event, payload, ref));
-      this.stateChangeCallbacks.message.forEach((callback) => callback(msg));
+      const { topic, event, payload, ref } = msg;
+      const refString = ref ? `(${ref})` : "";
+      const status = payload.status || "";
+      this.log("receive", `${status} ${topic} ${event} ${refString}`.trim(), payload);
+      this.channels.filter((channel) => channel._isMember(topic)).forEach((channel) => channel._trigger(event, payload, ref));
+      this._triggerStateCallbacks("message", msg);
     });
+  }
+  /**
+   * Clear specific timer
+   * @internal
+   */
+  _clearTimer(timer) {
+    var _a;
+    if (timer === "heartbeat" && this.heartbeatTimer) {
+      clearInterval(this.heartbeatTimer);
+      this.heartbeatTimer = void 0;
+    } else if (timer === "reconnect") {
+      (_a = this.reconnectTimer) === null || _a === void 0 ? void 0 : _a.reset();
+    }
+  }
+  /**
+   * Clear all timers
+   * @internal
+   */
+  _clearAllTimers() {
+    this._clearTimer("heartbeat");
+    this._clearTimer("reconnect");
+  }
+  /**
+   * Setup connection handlers for WebSocket events
+   * @internal
+   */
+  _setupConnectionHandlers() {
+    if (!this.conn)
+      return;
+    if ("binaryType" in this.conn) {
+      ;
+      this.conn.binaryType = "arraybuffer";
+    }
+    this.conn.onopen = () => this._onConnOpen();
+    this.conn.onerror = (error) => this._onConnError(error);
+    this.conn.onmessage = (event) => this._onConnMessage(event);
+    this.conn.onclose = (event) => this._onConnClose(event);
+  }
+  /**
+   * Teardown connection and cleanup resources
+   * @internal
+   */
+  _teardownConnection() {
+    if (this.conn) {
+      this.conn.onopen = null;
+      this.conn.onerror = null;
+      this.conn.onmessage = null;
+      this.conn.onclose = null;
+      this.conn = null;
+    }
+    this._clearAllTimers();
+    this.channels.forEach((channel) => channel.teardown());
   }
   /** @internal */
   _onConnOpen() {
+    this._setConnectionState("connected");
     this.log("transport", `connected to ${this.endpointURL()}`);
     this.flushSendBuffer();
-    this.reconnectTimer.reset();
+    this._clearTimer("reconnect");
     if (!this.worker) {
-      this.heartbeatTimer && clearInterval(this.heartbeatTimer);
-      this.heartbeatTimer = setInterval(() => this.sendHeartbeat(), this.heartbeatIntervalMs);
+      this._startHeartbeat();
     } else {
-      if (this.workerUrl) {
-        this.log("worker", `starting worker for from ${this.workerUrl}`);
-      } else {
-        this.log("worker", `starting default worker`);
+      if (!this.workerRef) {
+        this._startWorkerHeartbeat();
       }
-      const objectUrl = this._workerObjectUrl(this.workerUrl);
-      this.workerRef = new Worker(objectUrl);
-      this.workerRef.onerror = (error) => {
-        this.log("worker", "worker error", error.message);
-        this.workerRef.terminate();
-      };
-      this.workerRef.onmessage = (event) => {
-        if (event.data.event === "keepAlive") {
-          this.sendHeartbeat();
-        }
-      };
-      this.workerRef.postMessage({
-        event: "start",
-        interval: this.heartbeatIntervalMs
-      });
     }
-    this.stateChangeCallbacks.open.forEach((callback) => callback());
+    this._triggerStateCallbacks("open");
+  }
+  /** @internal */
+  _startHeartbeat() {
+    this.heartbeatTimer && clearInterval(this.heartbeatTimer);
+    this.heartbeatTimer = setInterval(() => this.sendHeartbeat(), this.heartbeatIntervalMs);
+  }
+  /** @internal */
+  _startWorkerHeartbeat() {
+    if (this.workerUrl) {
+      this.log("worker", `starting worker for from ${this.workerUrl}`);
+    } else {
+      this.log("worker", `starting default worker`);
+    }
+    const objectUrl = this._workerObjectUrl(this.workerUrl);
+    this.workerRef = new Worker(objectUrl);
+    this.workerRef.onerror = (error) => {
+      this.log("worker", "worker error", error.message);
+      this.workerRef.terminate();
+    };
+    this.workerRef.onmessage = (event) => {
+      if (event.data.event === "keepAlive") {
+        this.sendHeartbeat();
+      }
+    };
+    this.workerRef.postMessage({
+      event: "start",
+      interval: this.heartbeatIntervalMs
+    });
   }
   /** @internal */
   _onConnClose(event) {
+    var _a;
+    this._setConnectionState("disconnected");
     this.log("transport", "close", event);
     this._triggerChanError();
-    this.heartbeatTimer && clearInterval(this.heartbeatTimer);
-    this.reconnectTimer.scheduleTimeout();
-    this.stateChangeCallbacks.close.forEach((callback) => callback(event));
+    this._clearTimer("heartbeat");
+    if (!this._wasManualDisconnect) {
+      (_a = this.reconnectTimer) === null || _a === void 0 ? void 0 : _a.scheduleTimeout();
+    }
+    this._triggerStateCallbacks("close", event);
   }
   /** @internal */
   _onConnError(error) {
-    this.log("transport", error.message);
+    this._setConnectionState("disconnected");
+    this.log("transport", `${error}`);
     this._triggerChanError();
-    this.stateChangeCallbacks.error.forEach((callback) => callback(error));
+    this._triggerStateCallbacks("error", error);
   }
   /** @internal */
   _triggerChanError() {
@@ -2936,24 +3057,128 @@ var RealtimeClient = class {
     }
     return result_url;
   }
-};
-var WSWebSocketDummy = class {
-  constructor(address, _protocols, options) {
-    this.binaryType = "arraybuffer";
-    this.onclose = () => {
+  /**
+   * Set connection state with proper state management
+   * @internal
+   */
+  _setConnectionState(state, manual = false) {
+    this._connectionState = state;
+    if (state === "connecting") {
+      this._wasManualDisconnect = false;
+    } else if (state === "disconnecting") {
+      this._wasManualDisconnect = manual;
+    }
+  }
+  /**
+   * Perform the actual auth operation
+   * @internal
+   */
+  async _performAuth(token = null) {
+    let tokenToSend;
+    if (token) {
+      tokenToSend = token;
+    } else if (this.accessToken) {
+      tokenToSend = await this.accessToken();
+    } else {
+      tokenToSend = this.accessTokenValue;
+    }
+    if (this.accessTokenValue != tokenToSend) {
+      this.accessTokenValue = tokenToSend;
+      this.channels.forEach((channel) => {
+        const payload = {
+          access_token: tokenToSend,
+          version: DEFAULT_VERSION
+        };
+        tokenToSend && channel.updateJoinPayload(payload);
+        if (channel.joinedOnce && channel._isJoined()) {
+          channel._push(CHANNEL_EVENTS.access_token, {
+            access_token: tokenToSend
+          });
+        }
+      });
+    }
+  }
+  /**
+   * Wait for any in-flight auth operations to complete
+   * @internal
+   */
+  async _waitForAuthIfNeeded() {
+    if (this._authPromise) {
+      await this._authPromise;
+    }
+  }
+  /**
+   * Safely call setAuth with standardized error handling
+   * @internal
+   */
+  _setAuthSafely(context = "general") {
+    this.setAuth().catch((e) => {
+      this.log("error", `error setting auth in ${context}`, e);
+    });
+  }
+  /**
+   * Trigger state change callbacks with proper error handling
+   * @internal
+   */
+  _triggerStateCallbacks(event, data) {
+    try {
+      this.stateChangeCallbacks[event].forEach((callback) => {
+        try {
+          callback(data);
+        } catch (e) {
+          this.log("error", `error in ${event} callback`, e);
+        }
+      });
+    } catch (e) {
+      this.log("error", `error triggering ${event} callbacks`, e);
+    }
+  }
+  /**
+   * Setup reconnection timer with proper configuration
+   * @internal
+   */
+  _setupReconnectionTimer() {
+    this.reconnectTimer = new Timer(async () => {
+      setTimeout(async () => {
+        await this._waitForAuthIfNeeded();
+        if (!this.isConnected()) {
+          this.connect();
+        }
+      }, CONNECTION_TIMEOUTS.RECONNECT_DELAY);
+    }, this.reconnectAfterMs);
+  }
+  /**
+   * Initialize client options with defaults
+   * @internal
+   */
+  _initializeOptions(options) {
+    var _a, _b, _c, _d, _e, _f, _g, _h;
+    this.transport = (_a = options === null || options === void 0 ? void 0 : options.transport) !== null && _a !== void 0 ? _a : null;
+    this.timeout = (_b = options === null || options === void 0 ? void 0 : options.timeout) !== null && _b !== void 0 ? _b : DEFAULT_TIMEOUT;
+    this.heartbeatIntervalMs = (_c = options === null || options === void 0 ? void 0 : options.heartbeatIntervalMs) !== null && _c !== void 0 ? _c : CONNECTION_TIMEOUTS.HEARTBEAT_INTERVAL;
+    this.worker = (_d = options === null || options === void 0 ? void 0 : options.worker) !== null && _d !== void 0 ? _d : false;
+    this.accessToken = (_e = options === null || options === void 0 ? void 0 : options.accessToken) !== null && _e !== void 0 ? _e : null;
+    if (options === null || options === void 0 ? void 0 : options.params)
+      this.params = options.params;
+    if (options === null || options === void 0 ? void 0 : options.logger)
+      this.logger = options.logger;
+    if ((options === null || options === void 0 ? void 0 : options.logLevel) || (options === null || options === void 0 ? void 0 : options.log_level)) {
+      this.logLevel = options.logLevel || options.log_level;
+      this.params = Object.assign(Object.assign({}, this.params), { log_level: this.logLevel });
+    }
+    this.reconnectAfterMs = (_f = options === null || options === void 0 ? void 0 : options.reconnectAfterMs) !== null && _f !== void 0 ? _f : (tries) => {
+      return RECONNECT_INTERVALS[tries - 1] || DEFAULT_RECONNECT_FALLBACK;
     };
-    this.onerror = () => {
+    this.encode = (_g = options === null || options === void 0 ? void 0 : options.encode) !== null && _g !== void 0 ? _g : (payload, callback) => {
+      return callback(JSON.stringify(payload));
     };
-    this.onmessage = () => {
-    };
-    this.onopen = () => {
-    };
-    this.readyState = SOCKET_STATES.connecting;
-    this.send = () => {
-    };
-    this.url = null;
-    this.url = address;
-    this.close = options.close;
+    this.decode = (_h = options === null || options === void 0 ? void 0 : options.decode) !== null && _h !== void 0 ? _h : this.serializer.decode.bind(this.serializer);
+    if (this.worker) {
+      if (typeof window !== "undefined" && !window.Worker) {
+        throw new Error("Web Worker is not supported");
+      }
+      this.workerUrl = options === null || options === void 0 ? void 0 : options.workerUrl;
+    }
   }
 };
 
@@ -2969,16 +3194,18 @@ function isStorageError(error) {
   return typeof error === "object" && error !== null && "__isStorageError" in error;
 }
 var StorageApiError = class extends StorageError {
-  constructor(message, status) {
+  constructor(message, status, statusCode) {
     super(message);
     this.name = "StorageApiError";
     this.status = status;
+    this.statusCode = statusCode;
   }
   toJSON() {
     return {
       name: this.name,
       message: this.message,
-      status: this.status
+      status: this.status,
+      statusCode: this.statusCode
     };
   }
 };
@@ -3048,6 +3275,13 @@ var recursiveToCamel = (item) => {
   });
   return result;
 };
+var isPlainObject = (value) => {
+  if (typeof value !== "object" || value === null) {
+    return false;
+  }
+  const prototype = Object.getPrototypeOf(value);
+  return (prototype === null || prototype === Object.prototype || Object.getPrototypeOf(prototype) === null) && !(Symbol.toStringTag in value) && !(Symbol.iterator in value);
+};
 
 // node_modules/@supabase/storage-js/dist/module/lib/fetch.js
 var __awaiter3 = function(thisArg, _arguments, P, generator) {
@@ -3082,7 +3316,9 @@ var handleError = (error, reject, options) => __awaiter3(void 0, void 0, void 0,
   const Res = yield resolveResponse();
   if (error instanceof Res && !(options === null || options === void 0 ? void 0 : options.noResolveJson)) {
     error.json().then((err) => {
-      reject(new StorageApiError(_getErrorMessage(err), error.status || 500));
+      const status = error.status || 500;
+      const statusCode = (err === null || err === void 0 ? void 0 : err.statusCode) || status + "";
+      reject(new StorageApiError(_getErrorMessage(err), status, statusCode));
     }).catch((err) => {
       reject(new StorageUnknownError(_getErrorMessage(err), err));
     });
@@ -3092,12 +3328,17 @@ var handleError = (error, reject, options) => __awaiter3(void 0, void 0, void 0,
 });
 var _getRequestParams = (method, options, parameters, body) => {
   const params = { method, headers: (options === null || options === void 0 ? void 0 : options.headers) || {} };
-  if (method === "GET") {
+  if (method === "GET" || !body) {
     return params;
   }
-  params.headers = Object.assign({ "Content-Type": "application/json" }, options === null || options === void 0 ? void 0 : options.headers);
-  if (body) {
+  if (isPlainObject(body)) {
+    params.headers = Object.assign({ "Content-Type": "application/json" }, options === null || options === void 0 ? void 0 : options.headers);
     params.body = JSON.stringify(body);
+  } else {
+    params.body = body;
+  }
+  if (options === null || options === void 0 ? void 0 : options.duplex) {
+    params.duplex = options.duplex;
   }
   return Object.assign(Object.assign({}, params), parameters);
 };
@@ -3228,17 +3469,11 @@ var StorageFileApi = class {
         }
         const cleanPath = this._removeEmptyFolders(path);
         const _path = this._getFinalPath(cleanPath);
-        const res = yield this.fetch(`${this.url}/object/${_path}`, Object.assign({ method, body, headers }, (options === null || options === void 0 ? void 0 : options.duplex) ? { duplex: options.duplex } : {}));
-        const data = yield res.json();
-        if (res.ok) {
-          return {
-            data: { path: cleanPath, id: data.Id, fullPath: data.Key },
-            error: null
-          };
-        } else {
-          const error = data;
-          return { data: null, error };
-        }
+        const data = yield (method == "PUT" ? put : post)(this.fetch, `${this.url}/object/${_path}`, body, Object.assign({ headers }, (options === null || options === void 0 ? void 0 : options.duplex) ? { duplex: options.duplex } : {}));
+        return {
+          data: { path: cleanPath, id: data.Id, fullPath: data.Key },
+          error: null
+        };
       } catch (error) {
         if (isStorageError(error)) {
           return { data: null, error };
@@ -3286,21 +3521,11 @@ var StorageFileApi = class {
           headers["cache-control"] = `max-age=${options.cacheControl}`;
           headers["content-type"] = options.contentType;
         }
-        const res = yield this.fetch(url.toString(), {
-          method: "PUT",
-          body,
-          headers
-        });
-        const data = yield res.json();
-        if (res.ok) {
-          return {
-            data: { path: cleanPath, fullPath: data.Key },
-            error: null
-          };
-        } else {
-          const error = data;
-          return { data: null, error };
-        }
+        const data = yield put(this.fetch, url.toString(), body, { headers });
+        return {
+          data: { path: cleanPath, fullPath: data.Key },
+          error: null
+        };
       } catch (error) {
         if (isStorageError(error)) {
           return { data: null, error };
@@ -3629,12 +3854,32 @@ var StorageFileApi = class {
   /**
    * Lists all the files within a bucket.
    * @param path The folder path.
+   * @param options Search options including limit (defaults to 100), offset, sortBy, and search
    */
   list(path, options, parameters) {
     return __awaiter4(this, void 0, void 0, function* () {
       try {
         const body = Object.assign(Object.assign(Object.assign({}, DEFAULT_SEARCH_OPTIONS), options), { prefix: path || "" });
         const data = yield post(this.fetch, `${this.url}/object/list/${this.bucketId}`, body, { headers: this.headers }, parameters);
+        return { data, error: null };
+      } catch (error) {
+        if (isStorageError(error)) {
+          return { data: null, error };
+        }
+        throw error;
+      }
+    });
+  }
+  /**
+   * @experimental this method signature might change in the future
+   * @param options search options
+   * @param parameters
+   */
+  listV2(options, parameters) {
+    return __awaiter4(this, void 0, void 0, function* () {
+      try {
+        const body = Object.assign({}, options);
+        const data = yield post(this.fetch, `${this.url}/object/list-v2/${this.bucketId}`, body, { headers: this.headers }, parameters);
         return { data, error: null };
       } catch (error) {
         if (isStorageError(error)) {
@@ -3654,7 +3899,7 @@ var StorageFileApi = class {
     return btoa(data);
   }
   _getFinalPath(path) {
-    return `${this.bucketId}/${path}`;
+    return `${this.bucketId}/${path.replace(/^\/+/, "")}`;
   }
   _removeEmptyFolders(path) {
     return path.replace(/^\/|\/$/g, "").replace(/\/+/g, "/");
@@ -3681,10 +3926,10 @@ var StorageFileApi = class {
 };
 
 // node_modules/@supabase/storage-js/dist/module/lib/version.js
-var version2 = "2.7.1";
+var version2 = "2.11.0";
 
 // node_modules/@supabase/storage-js/dist/module/lib/constants.js
-var DEFAULT_HEADERS2 = { "X-Client-Info": `storage-js/${version2}` };
+var DEFAULT_HEADERS = { "X-Client-Info": `storage-js/${version2}` };
 
 // node_modules/@supabase/storage-js/dist/module/packages/StorageBucketApi.js
 var __awaiter5 = function(thisArg, _arguments, P, generator) {
@@ -3715,9 +3960,16 @@ var __awaiter5 = function(thisArg, _arguments, P, generator) {
   });
 };
 var StorageBucketApi = class {
-  constructor(url, headers = {}, fetch2) {
-    this.url = url;
-    this.headers = Object.assign(Object.assign({}, DEFAULT_HEADERS2), headers);
+  constructor(url, headers = {}, fetch2, opts) {
+    const baseUrl = new URL(url);
+    if (opts === null || opts === void 0 ? void 0 : opts.useNewHostname) {
+      const isSupabaseHost = /supabase\.(co|in|red)$/.test(baseUrl.hostname);
+      if (isSupabaseHost && !baseUrl.hostname.includes("storage.supabase.")) {
+        baseUrl.hostname = baseUrl.hostname.replace("supabase.", "storage.supabase.");
+      }
+    }
+    this.url = baseUrl.href;
+    this.headers = Object.assign(Object.assign({}, DEFAULT_HEADERS), headers);
     this.fetch = resolveFetch2(fetch2);
   }
   /**
@@ -3766,6 +4018,8 @@ var StorageBucketApi = class {
    * The default value is null, which allows files with all mime types to be uploaded.
    * Each mime type specified can be a wildcard, e.g. image/*, or a specific mime type, e.g. image/png.
    * @returns newly created bucket id
+   * @param options.type (private-beta) specifies the bucket type. see `BucketType` for more details.
+   *   - default bucket type is `STANDARD`
    */
   createBucket(id, options = {
     public: false
@@ -3775,6 +4029,7 @@ var StorageBucketApi = class {
         const data = yield post(this.fetch, `${this.url}/bucket`, {
           id,
           name: id,
+          type: options.type,
           public: options.public,
           file_size_limit: options.fileSizeLimit,
           allowed_mime_types: options.allowedMimeTypes
@@ -3860,8 +4115,8 @@ var StorageBucketApi = class {
 
 // node_modules/@supabase/storage-js/dist/module/StorageClient.js
 var StorageClient = class extends StorageBucketApi {
-  constructor(url, headers = {}, fetch2) {
-    super(url, headers, fetch2);
+  constructor(url, headers = {}, fetch2, opts) {
+    super(url, headers, fetch2, opts);
   }
   /**
    * Perform file operation in a bucket.
@@ -3874,7 +4129,7 @@ var StorageClient = class extends StorageBucketApi {
 };
 
 // node_modules/@supabase/supabase-js/dist/module/lib/version.js
-var version3 = "2.50.0";
+var version3 = "2.56.0";
 
 // node_modules/@supabase/supabase-js/dist/module/lib/constants.js
 var JS_ENV = "";
@@ -3887,9 +4142,9 @@ if (typeof Deno !== "undefined") {
 } else {
   JS_ENV = "node";
 }
-var DEFAULT_HEADERS3 = { "X-Client-Info": `supabase-js-${JS_ENV}/${version3}` };
+var DEFAULT_HEADERS2 = { "X-Client-Info": `supabase-js-${JS_ENV}/${version3}` };
 var DEFAULT_GLOBAL_OPTIONS = {
-  headers: DEFAULT_HEADERS3
+  headers: DEFAULT_HEADERS2
 };
 var DEFAULT_DB_OPTIONS = {
   schema: "public"
@@ -4004,6 +4259,7 @@ function applySettingDefaults(options, defaults) {
     db: Object.assign(Object.assign({}, DEFAULT_DB_OPTIONS2), dbOptions),
     auth: Object.assign(Object.assign({}, DEFAULT_AUTH_OPTIONS2), authOptions),
     realtime: Object.assign(Object.assign({}, DEFAULT_REALTIME_OPTIONS2), realtimeOptions),
+    storage: {},
     global: Object.assign(Object.assign(Object.assign({}, DEFAULT_GLOBAL_OPTIONS2), globalOptions), { headers: Object.assign(Object.assign({}, (_a = DEFAULT_GLOBAL_OPTIONS2 === null || DEFAULT_GLOBAL_OPTIONS2 === void 0 ? void 0 : DEFAULT_GLOBAL_OPTIONS2.headers) !== null && _a !== void 0 ? _a : {}), (_b = globalOptions === null || globalOptions === void 0 ? void 0 : globalOptions.headers) !== null && _b !== void 0 ? _b : {}) }),
     accessToken: () => __awaiter7(this, void 0, void 0, function* () {
       return "";
@@ -4018,7 +4274,7 @@ function applySettingDefaults(options, defaults) {
 }
 
 // node_modules/@supabase/auth-js/dist/module/lib/version.js
-var version4 = "2.70.0";
+var version4 = "2.71.1";
 
 // node_modules/@supabase/auth-js/dist/module/lib/constants.js
 var AUTO_REFRESH_TICK_DURATION_MS = 30 * 1e3;
@@ -4026,7 +4282,7 @@ var AUTO_REFRESH_TICK_THRESHOLD = 3;
 var EXPIRY_MARGIN_MS = AUTO_REFRESH_TICK_THRESHOLD * AUTO_REFRESH_TICK_DURATION_MS;
 var GOTRUE_URL = "http://localhost:9999";
 var STORAGE_KEY = "supabase.auth.token";
-var DEFAULT_HEADERS4 = { "X-Client-Info": `gotrue-js/${version4}` };
+var DEFAULT_HEADERS3 = { "X-Client-Info": `gotrue-js/${version4}` };
 var API_VERSION_HEADER_NAME = "X-Supabase-Api-Version";
 var API_VERSIONS = {
   "2024-01-01": {
@@ -4035,7 +4291,7 @@ var API_VERSIONS = {
   }
 };
 var BASE64URL_REGEX = /^([a-z0-9_-]{4})*($|[a-z0-9_-]{3}$|[a-z0-9_-]{2}$)$/i;
-var JWKS_TTL = 6e5;
+var JWKS_TTL = 10 * 60 * 1e3;
 
 // node_modules/@supabase/auth-js/dist/module/lib/errors.js
 var AuthError = class extends Error {
@@ -4554,6 +4810,32 @@ function validateUUID(str) {
     throw new Error("@supabase/auth-js: Expected parameter to be UUID but is not");
   }
 }
+function userNotAvailableProxy() {
+  const proxyTarget = {};
+  return new Proxy(proxyTarget, {
+    get: (target, prop) => {
+      if (prop === "__isUserNotAvailableProxy") {
+        return true;
+      }
+      if (typeof prop === "symbol") {
+        const sProp = prop.toString();
+        if (sProp === "Symbol(Symbol.toPrimitive)" || sProp === "Symbol(Symbol.toStringTag)" || sProp === "Symbol(util.inspect.custom)") {
+          return void 0;
+        }
+      }
+      throw new Error(`@supabase/auth-js: client was created with userStorage option and there was no user stored in the user storage. Accessing the "${prop}" property of the session object is not supported. Please use getUser() instead.`);
+    },
+    set: (_target, prop) => {
+      throw new Error(`@supabase/auth-js: client was created with userStorage option and there was no user stored in the user storage. Setting the "${prop}" property of the session object is not supported. Please use getUser() to fetch a user object you can manipulate.`);
+    },
+    deleteProperty: (_target, prop) => {
+      throw new Error(`@supabase/auth-js: client was created with userStorage option and there was no user stored in the user storage. Deleting the "${prop}" property of the session object is not supported. Please use getUser() to fetch a user object you can manipulate.`);
+    }
+  });
+}
+function deepClone(obj) {
+  return JSON.parse(JSON.stringify(obj));
+}
 
 // node_modules/@supabase/auth-js/dist/module/lib/fetch.js
 var __rest = function(s, e) {
@@ -4968,26 +5250,6 @@ var GoTrueAdminApi = class {
 };
 
 // node_modules/@supabase/auth-js/dist/module/lib/local-storage.js
-var localStorageAdapter = {
-  getItem: (key) => {
-    if (!supportsLocalStorage()) {
-      return null;
-    }
-    return globalThis.localStorage.getItem(key);
-  },
-  setItem: (key, value) => {
-    if (!supportsLocalStorage()) {
-      return;
-    }
-    globalThis.localStorage.setItem(key, value);
-  },
-  removeItem: (key) => {
-    if (!supportsLocalStorage()) {
-      return;
-    }
-    globalThis.localStorage.removeItem(key);
-  }
-};
 function memoryLocalStorageAdapter(store = {}) {
   return {
     getItem: (key) => {
@@ -5130,7 +5392,7 @@ var DEFAULT_OPTIONS = {
   autoRefreshToken: true,
   persistSession: true,
   detectSessionInUrl: true,
-  headers: DEFAULT_HEADERS4,
+  headers: DEFAULT_HEADERS3,
   flowType: "implicit",
   debug: false,
   hasCustomAuthorizationHeader: false
@@ -5138,12 +5400,14 @@ var DEFAULT_OPTIONS = {
 async function lockNoOp(name, acquireTimeout, fn) {
   return await fn();
 }
+var GLOBAL_JWKS = {};
 var GoTrueClient = class _GoTrueClient {
   /**
    * Create a new client for use in the browser.
    */
   constructor(options) {
     var _a, _b;
+    this.userStorage = null;
     this.memoryStorage = null;
     this.stateChangeEmitters = /* @__PURE__ */ new Map();
     this.autoRefreshTicker = null;
@@ -5189,8 +5453,10 @@ var GoTrueClient = class _GoTrueClient {
     } else {
       this.lock = lockNoOp;
     }
-    this.jwks = { keys: [] };
-    this.jwks_cached_at = Number.MIN_SAFE_INTEGER;
+    if (!this.jwks) {
+      this.jwks = { keys: [] };
+      this.jwks_cached_at = Number.MIN_SAFE_INTEGER;
+    }
     this.mfa = {
       verify: this._verify.bind(this),
       enroll: this._enroll.bind(this),
@@ -5205,11 +5471,14 @@ var GoTrueClient = class _GoTrueClient {
         this.storage = settings.storage;
       } else {
         if (supportsLocalStorage()) {
-          this.storage = localStorageAdapter;
+          this.storage = globalThis.localStorage;
         } else {
           this.memoryStorage = {};
           this.storage = memoryLocalStorageAdapter(this.memoryStorage);
         }
+      }
+      if (settings.userStorage) {
+        this.userStorage = settings.userStorage;
       }
     } else {
       this.memoryStorage = {};
@@ -5227,6 +5496,23 @@ var GoTrueClient = class _GoTrueClient {
       });
     }
     this.initialize();
+  }
+  /**
+   * The JWKS used for verifying asymmetric JWTs
+   */
+  get jwks() {
+    var _a, _b;
+    return (_b = (_a = GLOBAL_JWKS[this.storageKey]) === null || _a === void 0 ? void 0 : _a.jwks) !== null && _b !== void 0 ? _b : { keys: [] };
+  }
+  set jwks(value) {
+    GLOBAL_JWKS[this.storageKey] = Object.assign(Object.assign({}, GLOBAL_JWKS[this.storageKey]), { jwks: value });
+  }
+  get jwks_cached_at() {
+    var _a, _b;
+    return (_b = (_a = GLOBAL_JWKS[this.storageKey]) === null || _a === void 0 ? void 0 : _a.cachedAt) !== null && _b !== void 0 ? _b : Number.MIN_SAFE_INTEGER;
+  }
+  set jwks_cached_at(value) {
+    GLOBAL_JWKS[this.storageKey] = Object.assign(Object.assign({}, GLOBAL_JWKS[this.storageKey]), { cachedAt: value });
   }
   _debug(...args) {
     if (this.logDebugMessages) {
@@ -5989,7 +6275,15 @@ var GoTrueClient = class _GoTrueClient {
       const hasExpired = currentSession.expires_at ? currentSession.expires_at * 1e3 - Date.now() < EXPIRY_MARGIN_MS : false;
       this._debug("#__loadSession()", `session has${hasExpired ? "" : " not"} expired`, "expires_at", currentSession.expires_at);
       if (!hasExpired) {
-        if (this.storage.isServer) {
+        if (this.userStorage) {
+          const maybeUser = await getItemAsync(this.userStorage, this.storageKey + "-user");
+          if (maybeUser === null || maybeUser === void 0 ? void 0 : maybeUser.user) {
+            currentSession.user = maybeUser.user;
+          } else {
+            currentSession.user = userNotAvailableProxy();
+          }
+        }
+        if (this.storage.isServer && currentSession.user) {
           let suppressWarning = this.suppressGetSessionWarning;
           const proxySession = new Proxy(currentSession, {
             get: (target, prop, receiver) => {
@@ -6552,11 +6846,30 @@ var GoTrueClient = class _GoTrueClient {
    * Note: this method is async to accommodate for AsyncStorage e.g. in React native.
    */
   async _recoverAndRefresh() {
-    var _a;
+    var _a, _b;
     const debugName = "#_recoverAndRefresh()";
     this._debug(debugName, "begin");
     try {
       const currentSession = await getItemAsync(this.storage, this.storageKey);
+      if (currentSession && this.userStorage) {
+        let maybeUser = await getItemAsync(this.userStorage, this.storageKey + "-user");
+        if (!this.storage.isServer && Object.is(this.storage, this.userStorage) && !maybeUser) {
+          maybeUser = { user: currentSession.user };
+          await setItemAsync(this.userStorage, this.storageKey + "-user", maybeUser);
+        }
+        currentSession.user = (_a = maybeUser === null || maybeUser === void 0 ? void 0 : maybeUser.user) !== null && _a !== void 0 ? _a : userNotAvailableProxy();
+      } else if (currentSession && !currentSession.user) {
+        if (!currentSession.user) {
+          const separateUser = await getItemAsync(this.storage, this.storageKey + "-user");
+          if (separateUser && (separateUser === null || separateUser === void 0 ? void 0 : separateUser.user)) {
+            currentSession.user = separateUser.user;
+            await removeItemAsync(this.storage, this.storageKey + "-user");
+            await setItemAsync(this.storage, this.storageKey, currentSession);
+          } else {
+            currentSession.user = userNotAvailableProxy();
+          }
+        }
+      }
       this._debug(debugName, "session from storage", currentSession);
       if (!this._isValidSession(currentSession)) {
         this._debug(debugName, "session is not valid");
@@ -6565,7 +6878,7 @@ var GoTrueClient = class _GoTrueClient {
         }
         return;
       }
-      const expiresWithMargin = ((_a = currentSession.expires_at) !== null && _a !== void 0 ? _a : Infinity) * 1e3 - Date.now() < EXPIRY_MARGIN_MS;
+      const expiresWithMargin = ((_b = currentSession.expires_at) !== null && _b !== void 0 ? _b : Infinity) * 1e3 - Date.now() < EXPIRY_MARGIN_MS;
       this._debug(debugName, `session has${expiresWithMargin ? "" : " not"} expired with margin of ${EXPIRY_MARGIN_MS}s`);
       if (expiresWithMargin) {
         if (this.autoRefreshToken && currentSession.refresh_token) {
@@ -6577,6 +6890,20 @@ var GoTrueClient = class _GoTrueClient {
               await this._removeSession();
             }
           }
+        }
+      } else if (currentSession.user && currentSession.user.__isUserNotAvailableProxy === true) {
+        try {
+          const { data, error: userError } = await this._getUser(currentSession.access_token);
+          if (!userError && (data === null || data === void 0 ? void 0 : data.user)) {
+            currentSession.user = data.user;
+            await this._saveSession(currentSession);
+            await this._notifyAllSubscribers("SIGNED_IN", currentSession);
+          } else {
+            this._debug(debugName, "could not get user data, skipping SIGNED_IN notification");
+          }
+        } catch (getUserError) {
+          console.error("Error getting user data:", getUserError);
+          this._debug(debugName, "error getting user data, skipping SIGNED_IN notification", getUserError);
         }
       } else {
         await this._notifyAllSubscribers("SIGNED_IN", currentSession);
@@ -6661,11 +6988,32 @@ var GoTrueClient = class _GoTrueClient {
   async _saveSession(session) {
     this._debug("#_saveSession()", session);
     this.suppressGetSessionWarning = true;
-    await setItemAsync(this.storage, this.storageKey, session);
+    const sessionToProcess = Object.assign({}, session);
+    const userIsProxy = sessionToProcess.user && sessionToProcess.user.__isUserNotAvailableProxy === true;
+    if (this.userStorage) {
+      if (!userIsProxy && sessionToProcess.user) {
+        await setItemAsync(this.userStorage, this.storageKey + "-user", {
+          user: sessionToProcess.user
+        });
+      } else if (userIsProxy) {
+      }
+      const mainSessionData = Object.assign({}, sessionToProcess);
+      delete mainSessionData.user;
+      const clonedMainSessionData = deepClone(mainSessionData);
+      await setItemAsync(this.storage, this.storageKey, clonedMainSessionData);
+    } else {
+      const clonedSession = deepClone(sessionToProcess);
+      await setItemAsync(this.storage, this.storageKey, clonedSession);
+    }
   }
   async _removeSession() {
     this._debug("#_removeSession()");
     await removeItemAsync(this.storage, this.storageKey);
+    await removeItemAsync(this.storage, this.storageKey + "-code-verifier");
+    await removeItemAsync(this.storage, this.storageKey + "-user");
+    if (this.userStorage) {
+      await removeItemAsync(this.userStorage, this.storageKey + "-user");
+    }
     await this._notifyAllSubscribers("SIGNED_OUT", null);
   }
   /**
@@ -7050,8 +7398,9 @@ var GoTrueClient = class _GoTrueClient {
     if (jwk) {
       return jwk;
     }
+    const now = Date.now();
     jwk = this.jwks.keys.find((key) => key.kid === kid);
-    if (jwk && this.jwks_cached_at + JWKS_TTL > Date.now()) {
+    if (jwk && this.jwks_cached_at + JWKS_TTL > now) {
       return jwk;
     }
     const { data, error } = await _request(this.fetch, "GET", `${this.url}/.well-known/jwks.json`, {
@@ -7061,21 +7410,33 @@ var GoTrueClient = class _GoTrueClient {
       throw error;
     }
     if (!data.keys || data.keys.length === 0) {
-      throw new AuthInvalidJwtError("JWKS is empty");
+      return null;
     }
     this.jwks = data;
-    this.jwks_cached_at = Date.now();
+    this.jwks_cached_at = now;
     jwk = data.keys.find((key) => key.kid === kid);
     if (!jwk) {
-      throw new AuthInvalidJwtError("No matching signing key found in JWKS");
+      return null;
     }
     return jwk;
   }
   /**
-   * @experimental This method may change in future versions.
-   * @description Gets the claims from a JWT. If the JWT is symmetric JWTs, it will call getUser() to verify against the server. If the JWT is asymmetric, it will be verified against the JWKS using the WebCrypto API.
+   * Extracts the JWT claims present in the access token by first verifying the
+   * JWT against the server's JSON Web Key Set endpoint
+   * `/.well-known/jwks.json` which is often cached, resulting in significantly
+   * faster responses. Prefer this method over {@link #getUser} which always
+   * sends a request to the Auth server for each JWT.
+   *
+   * If the project is not using an asymmetric JWT signing key (like ECC or
+   * RSA) it always sends a request to the Auth server (similar to {@link
+   * #getUser}) to verify the JWT.
+   *
+   * @param jwt An optional specific JWT you wish to verify, not the one you
+   *            can obtain from {@link #getSession}.
+   * @param options Various additional options that allow you to customize the
+   *                behavior of this method.
    */
-  async getClaims(jwt, jwks = { keys: [] }) {
+  async getClaims(jwt, options = {}) {
     try {
       let token = jwt;
       if (!token) {
@@ -7086,8 +7447,11 @@ var GoTrueClient = class _GoTrueClient {
         token = data.session.access_token;
       }
       const { header, payload, signature, raw: { header: rawHeader, payload: rawPayload } } = decodeJWT(token);
-      validateExp(payload.exp);
-      if (!header.kid || header.alg === "HS256" || !("crypto" in globalThis && "subtle" in globalThis.crypto)) {
+      if (!(options === null || options === void 0 ? void 0 : options.allowExpired)) {
+        validateExp(payload.exp);
+      }
+      const signingKey = !header.alg || header.alg.startsWith("HS") || !header.kid || !("crypto" in globalThis && "subtle" in globalThis.crypto) ? null : await this.fetchJwk(header.kid, (options === null || options === void 0 ? void 0 : options.keys) ? { keys: options.keys } : options === null || options === void 0 ? void 0 : options.jwks);
+      if (!signingKey) {
         const { error } = await this.getUser(token);
         if (error) {
           throw error;
@@ -7102,7 +7466,6 @@ var GoTrueClient = class _GoTrueClient {
         };
       }
       const algorithm = getAlgorithm(header.alg);
-      const signingKey = await this.fetchJwk(header.kid, jwks);
       const publicKey = await crypto.subtle.importKey("jwk", signingKey, algorithm, true, [
         "verify"
       ]);
@@ -7181,6 +7544,7 @@ var SupabaseClient = class {
    * @param options.auth.persistSession Set to "true" if you want to automatically save the user session into local storage.
    * @param options.auth.detectSessionInUrl Set to "true" if you want to automatically detects OAuth grants in the URL and signs in the user.
    * @param options.realtime Options passed along to realtime-js constructor.
+   * @param options.storage Options passed along to the storage-js constructor.
    * @param options.global.fetch A custom fetch implementation.
    * @param options.global.headers Any additional headers to send with each network request.
    */
@@ -7226,6 +7590,7 @@ var SupabaseClient = class {
       schema: settings.db.schema,
       fetch: this.fetch
     });
+    this.storage = new StorageClient(this.storageUrl.href, this.headers, this.fetch, options === null || options === void 0 ? void 0 : options.storage);
     if (!settings.accessToken) {
       this._listenForAuthEvents();
     }
@@ -7238,12 +7603,6 @@ var SupabaseClient = class {
       headers: this.headers,
       customFetch: this.fetch
     });
-  }
-  /**
-   * Supabase Storage allows you to manage user-generated content, such as photos or videos.
-   */
-  get storage() {
-    return new StorageClient(this.storageUrl.href, this.headers, this.fetch);
   }
   /**
    * Perform a query on a table or a view.
@@ -7329,7 +7688,7 @@ var SupabaseClient = class {
         return yield this.accessToken();
       }
       const { data } = yield this.auth.getSession();
-      return (_b = (_a = data.session) === null || _a === void 0 ? void 0 : _a.access_token) !== null && _b !== void 0 ? _b : null;
+      return (_b = (_a = data.session) === null || _a === void 0 ? void 0 : _a.access_token) !== null && _b !== void 0 ? _b : this.supabaseKey;
     });
   }
   _initSupabaseAuthClient({ autoRefreshToken, persistSession, detectSessionInUrl, storage, storageKey, flowType, lock, debug }, headers, fetch2) {
@@ -7379,6 +7738,27 @@ var SupabaseClient = class {
 var createClient = (supabaseUrl, supabaseKey, options) => {
   return new SupabaseClient(supabaseUrl, supabaseKey, options);
 };
+function shouldShowDeprecationWarning() {
+  if (typeof window !== "undefined") {
+    return false;
+  }
+  if (typeof process === "undefined") {
+    return false;
+  }
+  const processVersion = process["version"];
+  if (processVersion === void 0 || processVersion === null) {
+    return false;
+  }
+  const versionMatch = processVersion.match(/^v(\d+)\./);
+  if (!versionMatch) {
+    return false;
+  }
+  const majorVersion = parseInt(versionMatch[1], 10);
+  return majorVersion <= 18;
+}
+if (shouldShowDeprecationWarning()) {
+  console.warn(`⚠️  Node.js 18 and below are deprecated and will no longer be supported in future versions of @supabase/supabase-js. Please upgrade to Node.js 20 or later. For more information, visit: https://github.com/orgs/supabase/discussions/37217`);
+}
 export {
   AuthAdminApi_default as AuthAdminApi,
   AuthApiError,
@@ -7413,6 +7793,7 @@ export {
   RealtimePresence,
   SIGN_OUT_SCOPES,
   SupabaseClient,
+  websocket_factory_default as WebSocketFactory,
   createClient,
   isAuthApiError,
   isAuthError,

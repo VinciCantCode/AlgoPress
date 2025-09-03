@@ -1,61 +1,61 @@
 {
-  "hash": "e0e5b9cb",
-  "configHash": "c0bdc76c",
+  "hash": "dd3f512b",
+  "configHash": "e1ce3111",
   "lockfileHash": "9d726dd8",
-  "browserHash": "b499992c",
+  "browserHash": "3c1e8e92",
   "optimized": {
     "vue": {
       "src": "../../../../node_modules/vue/dist/vue.runtime.esm-bundler.js",
       "file": "vue.js",
-      "fileHash": "fdc7ca75",
+      "fileHash": "c9962eec",
       "needsInterop": false
     },
     "vitepress > @vue/devtools-api": {
       "src": "../../../../node_modules/@vue/devtools-api/dist/index.js",
       "file": "vitepress___@vue_devtools-api.js",
-      "fileHash": "6aab4510",
+      "fileHash": "8e4b6730",
       "needsInterop": false
     },
     "vitepress > @vueuse/core": {
       "src": "../../../../node_modules/@vueuse/core/index.mjs",
       "file": "vitepress___@vueuse_core.js",
-      "fileHash": "53725cea",
+      "fileHash": "db6203f0",
       "needsInterop": false
     },
     "vitepress > @vueuse/integrations/useFocusTrap": {
       "src": "../../../../node_modules/@vueuse/integrations/useFocusTrap.mjs",
       "file": "vitepress___@vueuse_integrations_useFocusTrap.js",
-      "fileHash": "fc41903d",
+      "fileHash": "de431d3b",
       "needsInterop": false
     },
     "vitepress > mark.js/src/vanilla.js": {
       "src": "../../../../node_modules/mark.js/src/vanilla.js",
       "file": "vitepress___mark__js_src_vanilla__js.js",
-      "fileHash": "401d9c1a",
+      "fileHash": "791a01e1",
       "needsInterop": false
     },
     "vitepress > minisearch": {
       "src": "../../../../node_modules/minisearch/dist/es/index.js",
       "file": "vitepress___minisearch.js",
-      "fileHash": "7240ea31",
+      "fileHash": "170b90d8",
       "needsInterop": false
     },
     "@vercel/analytics": {
       "src": "../../../../node_modules/@vercel/analytics/dist/index.mjs",
       "file": "@vercel_analytics.js",
-      "fileHash": "2f678248",
+      "fileHash": "724f069b",
       "needsInterop": false
     },
     "@vercel/speed-insights": {
       "src": "../../../../node_modules/@vercel/speed-insights/dist/index.mjs",
       "file": "@vercel_speed-insights.js",
-      "fileHash": "978268bc",
+      "fileHash": "0ca91b20",
       "needsInterop": false
     },
     "@supabase/supabase-js": {
       "src": "../../../../node_modules/@supabase/supabase-js/dist/module/index.js",
       "file": "@supabase_supabase-js.js",
-      "fileHash": "26c32317",
+      "fileHash": "339bc60b",
       "needsInterop": false
     }
   },
@@ -66,11 +66,11 @@
     "chunk-G7KV7Q2M": {
       "file": "chunk-G7KV7Q2M.js"
     },
-    "chunk-Z5QSWKN2": {
-      "file": "chunk-Z5QSWKN2.js"
+    "chunk-VAQRGIME": {
+      "file": "chunk-VAQRGIME.js"
     },
-    "chunk-LW4I4DCF": {
-      "file": "chunk-LW4I4DCF.js"
+    "chunk-5KYYQTCL": {
+      "file": "chunk-5KYYQTCL.js"
     },
     "chunk-V4OQ3NZ2": {
       "file": "chunk-V4OQ3NZ2.js"
