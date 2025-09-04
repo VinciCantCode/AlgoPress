@@ -48,7 +48,7 @@ hero:
       link: /array-and-string/238
     - theme: alt
       text: Top 100
-      link: /top-100/hashing/1
+      link: /top-100/two-pointers/42
 
     
 
