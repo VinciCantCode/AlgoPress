@@ -240,7 +240,14 @@ export default defineConfig({
               { text: '283. Move Zeroes', link: '/Top-100/Two-Pointers/283.md' },
               { text: '11. Container With Most Water', link: '/Top-100/Two-Pointers/11.md' },
               { text: '15. 3Sum', link: '/Top-100/Two-Pointers/15.md' },
-              
+              { text: '42. Trapping Rain Water', link: '/Top-100/Two-Pointers/42.md' },
+            ]
+          },
+          {
+            text: 'Sliding Window',
+            collapsed: true,
+            items: [
+              { text: '3. Longest Substring Without Repeating Characters', link: '/Top-100/Sliding-Window/3.md' },
             ]
           },
         ]
