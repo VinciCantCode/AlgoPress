@@ -12,43 +12,43 @@ hero:
   actions:
     - theme: brand
       text: Introduction
-      link: /Welcome-to-My-LeetCode/introduction
+      link: /welcome-to-my-leetcode/introduction
     - theme: alt
       text: Entry Level 20 Questions
-      link: /Entry-Level-20-Questions/introduction
+      link: /entry-level-20-questions/introduction
     - theme: alt
       text: Two Pointers
-      link: /Two-Pointers/167
+      link: /two-pointers/167
     - theme: alt
       text: Sliding Window
-      link: /Sliding-Window/209
+      link: /sliding-window/209
     - theme: alt
       text: Binary Search
-      link: /Binary-Search/852
+      link: /binary-search/852
     - theme: alt
       text: Linked List
-      link: /Linked-List/206
+      link: /linked-list/206
     - theme: alt
       text: Hash Table
-      link: /Hash-Table/242
+      link: /hash-table/242
     - theme: alt
       text: Binary Tree
-      link: /Binary-Tree/104
+      link: /binary-tree/104
     - theme: alt
       text: Backtracking
-      link: /Backtracking/77
+      link: /backtracking/77
     - theme: alt
       text: Dynamic Programming
-      link: /Dynamic-Programming/198
+      link: /dynamic-programming/198
     - theme: alt
       text: Design Data Structure
-      link: /Design-Data-Structure/211
+      link: /design-data-structure/211
     - theme: alt
       text: Array And String
-      link: /Array-And-String/238
+      link: /array-and-string/238
     - theme: alt
       text: Top 100
-      link: /Top-100/Hashing/1
+      link: /top-100/hashing/1
 
     
 
