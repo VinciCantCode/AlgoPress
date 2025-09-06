@@ -249,6 +249,7 @@ export default defineConfig({
             items: [
               { text: '3. Longest Substring Without Repeating Characters', link: '/top-100/sliding-window/3.md' },
               { text: '438. Find All Anagrams in a String', link: '/top-100/sliding-window/438.md' },
+              { text: '76. Minimum Window Substring', link: '/top-100/sliding-window/76.md' },
             ]
           },
         ]
