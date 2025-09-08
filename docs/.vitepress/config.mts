@@ -253,6 +253,14 @@ export default defineConfig({
               { text: '239. Sliding Window Maximum', link: '/top-100/sliding-window/239.md' },
             ]
           },
+          {
+            text: 'Greedy',
+            collapsed: true,
+            items: [
+              { text: '55. Jump Game', link: '/top-100/greedy/55.md' },
+              { text: '121. Best Time to Buy and Sell Stock', link: '/top-100/greedy/121.md' },
+            ]
+          },
         ]
       },
       // {
