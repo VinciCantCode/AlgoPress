@@ -211,7 +211,7 @@ export default defineConfig({
         text: 'Array and String',
         collapsed: true,
         items: [
-          { text: '238. Product of Array Except Self', link: '/array-and-string/238.md' },  
+          { text: '238. Product of Array Except Self', link: '/array-and-string/238.md' },
           { text: '268. Missing Number', link: '/array-and-string/268.md' },
           { text: '48. Rotate Image', link: '/array-and-string/48.md' },
           { text: '165. Compare Version Numbers', link: '/array-and-string/165.md' },
@@ -220,7 +220,8 @@ export default defineConfig({
         ]
       },
 
-      {text: 'Top-100',
+      {
+        text: 'Top-100',
         collapsed: true,
         items: [
           {
@@ -263,6 +264,13 @@ export default defineConfig({
               { text: '45. Jump Game II', link: '/top-100/greedy/45.md' },
             ]
           },
+          {
+            text: 'Heap',
+            collapsed: true,
+            items: [
+              { text: '215. Kth Largest Element in an Array', link: '/top-100/heap/215.md' },
+            ]
+          }
         ]
       },
       // {
